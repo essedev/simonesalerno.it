@@ -42,7 +42,7 @@
 					data-sveltekit-reload
 				>
 					<span
-						class="inline-block bg-gradient-to-r from-gray-300 to-gray-300 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out hover:bg-[length:100%_2px]"
+						class="inline-block bg-gradient-to-r from-accent to-accent bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-all duration-500 ease-out hover:bg-[length:100%_2px]"
 					>
 						{link.name}
 					</span>

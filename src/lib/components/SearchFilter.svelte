@@ -245,7 +245,7 @@
 					{translateTag(global, originalCaseTag)}
 					<button
 						onclick={() => handleTagToggle(originalCaseTag)}
-						class="rounded-full p-1 hover:bg-white/20"
+						class="rounded-sm p-1 hover:bg-white/20"
 						aria-label="{t.removeFilter} {originalCaseTag}"
 					>
 						<X class="h-3 w-3" />
@@ -267,7 +267,7 @@
 									: status}
 					<button
 						onclick={() => handleStatusToggle(status)}
-						class="rounded-full p-1 hover:bg-blue-400/20"
+						class="rounded-sm p-1 hover:bg-accent/20"
 						aria-label="{t.removeFilter} {status}"
 					>
 						<X class="h-3 w-3" />
