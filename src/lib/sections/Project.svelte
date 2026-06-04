@@ -47,19 +47,8 @@
 	</div>
 
 	{#if content && currentTranslation}
-		<div class="flex flex-col gap-y-6 xl:flex-row xl:gap-x-14">
-			<div class="w-full xl:w-1/2">
-				{#if content.meta.featured_image || content.meta.featuredImagePlaceholder}
-					<OptimizedImage
-						src={content.meta.featured_image}
-						alt={currentTranslation.title}
-						className="aspect-video rounded-xl"
-						showPlaceholder={Boolean(content.meta.featuredImagePlaceholder)}
-						sizes="(max-width: 1280px) 100vw, 50vw"
-					/>
-				{/if}
-			</div>
-			<div class="flex w-full flex-col gap-y-6 xl:w-1/2">
+		<article class="flex flex-col gap-y-8">
+			<header class="flex flex-col gap-y-6">
 				{#if content.meta.status}
 					<StatusBadge status={content.meta.status} {global} class="self-start" />
 				{/if}
@@ -99,11 +88,23 @@
 						{/each}
 					</div>
 				{/if}
+			</header>
 
-				{#if currentTranslation.content}
-					<ContentRenderer content={currentTranslation.content} className="flex flex-col gap-y-4" />
-				{/if}
-			</div>
-		</div>
+			{#if content.meta.featured_image || content.meta.featuredImagePlaceholder}
+				<div class="w-full">
+					<OptimizedImage
+						src={content.meta.featured_image}
+						alt={currentTranslation.title}
+						className="aspect-video rounded-xl"
+						showPlaceholder={Boolean(content.meta.featuredImagePlaceholder)}
+						sizes="100vw"
+					/>
+				</div>
+			{/if}
+
+			{#if currentTranslation.content}
+				<ContentRenderer content={currentTranslation.content} className="flex flex-col gap-y-4" />
+			{/if}
+		</article>
 	{/if}
 </div>

@@ -448,7 +448,10 @@ vision completa, le idee considerate e quelle scartate vivono in `docs/RESTYLE.m
 
 - **Pagine dettaglio:** tag progetto/articolo da pill (`rounded-full bg-gray-800`)
   a tag mono squadrati coerenti con le card (border, hover accento); immagine
-  featured da `rounded-3xl` (fuori token) a `rounded-xl`.
+  featured da `rounded-3xl` (fuori token) a `rounded-xl`. Layout dettaglio progetto
+  uniformato all'articolo: header a piena larghezza, immagine full-width sotto,
+  contenuto sotto (prima l'immagine era affiancata al 50% e il body schiacciato in
+  mezza colonna).
 - **Paginazione:** da `rounded-lg` + testo inglese hardcoded ("Prev/Next/Page X of
   Y") a indice numerato mono `01 / 04` (corrente in accento), language-agnostic.
 - **404:** numero in mono accento + back link mono con hover accento.
