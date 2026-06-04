@@ -69,13 +69,13 @@
 		aria-haspopup="listbox"
 		aria-controls={dropdownId}
 		onclick={toggleDropdown}
-		class="flex w-full cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-white/80 backdrop-blur-md transition-colors hover:bg-white/10"
+		class="flex w-full cursor-pointer items-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 py-2 font-mono text-sm text-white/80 backdrop-blur-md transition-colors hover:border-accent/40 hover:bg-white/10"
 		style="touch-action: manipulation;"
 	>
 		<Tag class="h-4 w-4" />
 		{t.tags}
 		{#if selectedTagsCount > 0}
-			<span class="ml-1 rounded-full bg-white/15 px-2 py-1 text-xs backdrop-blur-sm">
+			<span class="ml-1 rounded bg-accent/20 px-2 py-0.5 text-xs text-accent backdrop-blur-sm">
 				{selectedTagsCount}
 			</span>
 		{/if}

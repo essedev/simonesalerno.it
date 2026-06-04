@@ -126,6 +126,7 @@
 					featuredImagePlaceholder={project.meta.featuredImagePlaceholder}
 					tags={translateTags(global, project.translations[selectedLanguage].tags)}
 					status={project.meta.status}
+					year={project.meta.created_date?.slice(0, 4)}
 					{global}
 					link={'/' +
 						selectedLanguage +

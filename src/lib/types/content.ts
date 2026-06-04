@@ -208,6 +208,7 @@ export interface ProjectCardProps {
 	link: string;
 	tags?: string[];
 	status?: 'completed' | 'in-progress' | 'idea' | 'archived';
+	year?: string;
 	global: GlobalContent | null | undefined;
 }
 

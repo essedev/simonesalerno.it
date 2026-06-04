@@ -168,7 +168,7 @@
 	);
 </script>
 
-<div class="flex flex-col gap-4 rounded-3xl border border-white/10 bg-black/20 p-6">
+<div class="flex flex-col gap-4 rounded-lg border border-white/10 bg-black/20 p-5">
 	<!-- Search Input -->
 	<div class="relative">
 		<input
@@ -176,7 +176,7 @@
 			value={filters.query}
 			oninput={handleQueryChange}
 			{placeholder}
-			class="w-full rounded-2xl border border-white/10 bg-white/2 px-4 py-3 pl-12 text-white placeholder-white/50 backdrop-blur-sm focus:border-white/20 focus:outline-none"
+			class="w-full rounded-md border border-white/10 bg-white/2 px-4 py-3 pl-12 text-white placeholder-white/40 backdrop-blur-sm focus:border-accent/60 focus:outline-none"
 		/>
 		<Search class="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-white/50" />
 	</div>
@@ -227,7 +227,7 @@
 		{#if hasActiveFilters}
 			<button
 				onclick={clearAllFilters}
-				class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-white/80 backdrop-blur-sm transition-colors hover:bg-white/10"
+				class="rounded-md border border-white/10 bg-white/5 px-4 py-2 font-mono text-sm text-white/80 backdrop-blur-sm transition-colors hover:border-accent/40 hover:bg-white/10"
 			>
 				{t.clearFilters}
 			</button>
@@ -240,7 +240,7 @@
 			{#each filters.selectedTags as tag (tag)}
 				{@const originalCaseTag = findOriginalCaseTag(tag)}
 				<span
-					class="inline-flex items-center gap-1 rounded-full bg-white/15 px-3 py-1 text-sm text-white/80"
+					class="inline-flex items-center gap-1 rounded-md bg-white/10 px-2.5 py-1 font-mono text-xs text-white/80"
 				>
 					{translateTag(global, originalCaseTag)}
 					<button
@@ -254,7 +254,7 @@
 			{/each}
 			{#each filters.selectedStatuses as status (status)}
 				<span
-					class="inline-flex items-center gap-1 rounded-full border border-blue-400/20 bg-blue-500/20 px-3 py-1 text-sm text-blue-200"
+					class="inline-flex items-center gap-1 rounded-md border border-accent/30 bg-accent/15 px-2.5 py-1 font-mono text-xs text-accent"
 				>
 					{status === 'completed'
 						? t.statusCompleted
