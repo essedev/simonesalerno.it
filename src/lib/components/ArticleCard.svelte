@@ -23,7 +23,7 @@
 
 <a
 	href={`${base}${link}`}
-	class="group flex flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.02] transition-[transform,border-color] duration-200 ease-out hover:-translate-y-1 hover:border-accent/60"
+	class="group flex flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.02] transition-[transform,border-color] duration-200 ease-out hover:-translate-y-1 hover:border-accent/50"
 >
 	<OptimizedImage
 		src={featuredImage}

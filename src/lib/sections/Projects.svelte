@@ -150,7 +150,7 @@
 			<div class="flex justify-center">
 				<a
 					href={projectsPageLink}
-					class="group flex items-center gap-3 rounded-lg border border-white/10 bg-white/[.01] px-8 py-4 backdrop-blur-md transition-colors duration-200 hover:border-accent/50 hover:bg-white/[.05]"
+					class="group flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.02] px-8 py-4 backdrop-blur-md transition-colors duration-200 hover:border-accent/50 hover:bg-white/10"
 				>
 					<span class="text-lg font-medium text-gray-300">{t.viewAll}</span>
 					<ArrowRight
