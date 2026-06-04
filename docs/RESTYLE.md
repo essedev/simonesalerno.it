@@ -150,12 +150,13 @@ Design system di base, su cui la pixel art si poserà in seguito. Decisioni pres
 ## Stato (2026-06-04)
 
 - Voce + label "Esplorazione" su `main` (deployate).
-- Branch `restyle/laboratory` (11 commit, non mergiato). **Fatto:** palette,
-  tipografia, hero, navbar (logo testuale + indice numerato + status bar + toggle
-  lingua), card progetti/articoli a scheda d'archivio + badge, filtri mono, footer,
-  floating squadrata, back-to-top, arrotondamento via token, shortcut tastiera
-  (1-4 sezioni, 0/Home top, End fondo), `//` rimosso dal content delle voci.
-- **Resta:** pagine dettaglio/about/contatti/paginazione/404; animazioni come
-  sistema; pixel art; contenuti progetti. Prima del merge: `build` + `test:ci`
-  (con E2E da aggiornare per nav/welcome/badge) + merge su `main`.
+- Branch `restyle/laboratory` (non mergiato). **Fatto:** palette, tipografia, hero,
+  navbar (logo testuale + indice numerato + status bar + toggle lingua), card
+  progetti/articoli a scheda d'archivio + badge, filtri mono, footer, floating
+  squadrata, back-to-top, arrotondamento via token, shortcut tastiera (1-4 sezioni,
+  0/Home top, End fondo), `//` rimosso dal content. Pagine dettaglio (tag mono
+  squadrati + immagine a token), paginazione a indice numerato (`01 / 04`, accento),
+  404 in mono accent, link contatti e chip filtri allineati all'accento.
+- **Resta:** animazioni come sistema; pixel art; contenuti progetti. Prima del merge:
+  `build` + `test:ci` (con E2E da aggiornare per nav/welcome/badge) + merge su `main`.
 - Log dettagliato in `docs/CYCLES.md` (Ciclo 9).

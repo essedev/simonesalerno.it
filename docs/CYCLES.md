@@ -444,10 +444,20 @@ vision completa, le idee considerate e quelle scartate vivono in `docs/RESTYLE.m
 - **NON ancora fatto:** `pnpm build` + `pnpm test:ci` completo. Alcuni E2E vanno
   aggiornati (cambiate voci nav, welcome, badge di stato).
 
+### Blocco 1 - pagine restanti (fatto)
+
+- **Pagine dettaglio:** tag progetto/articolo da pill (`rounded-full bg-gray-800`)
+  a tag mono squadrati coerenti con le card (border, hover accento); immagine
+  featured da `rounded-3xl` (fuori token) a `rounded-xl`.
+- **Paginazione:** da `rounded-lg` + testo inglese hardcoded ("Prev/Next/Page X of
+  Y") a indice numerato mono `01 / 04` (corrente in accento), language-agnostic.
+- **404:** numero in mono accento + back link mono con hover accento.
+- **Contatti / chip filtri:** underline contatti che cresce in accento (era grigio);
+  bottoni X di rimozione filtro `rounded-sm` (erano `rounded-full`) e accento (era
+  `blue-400`).
+
 ### Cosa resta
 
-- Pagine **dettaglio** (progetto/articolo, tag ancora pill), **about**, **contatti**,
-  **paginazione**, **404**.
 - Cantieri grossi: animazioni come sistema, pixel art autoprodotta (`idkcraft-studio`),
   riscrittura/ricurazione dei contenuti progetti (decidere quali/quanti, usare lo
   status "Esplorazione").
