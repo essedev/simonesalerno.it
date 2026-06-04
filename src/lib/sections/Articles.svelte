@@ -114,7 +114,7 @@
 			<div class="flex justify-center">
 				<a
 					href={blogPageLink}
-					class="group flex items-center gap-3 rounded-full border border-white/10 bg-white/[.01] px-8 py-4 backdrop-blur-md transition-all duration-300 ease-in-out hover:scale-105 hover:border-white/20 hover:bg-white/[.05]"
+					class="group flex items-center gap-3 rounded-lg border border-white/10 bg-white/[.01] px-8 py-4 backdrop-blur-md transition-colors duration-200 hover:border-accent/50 hover:bg-white/[.05]"
 				>
 					<span class="text-lg font-medium text-gray-300">{t.viewAll}</span>
 					<ArrowRight

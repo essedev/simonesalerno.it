@@ -48,7 +48,7 @@
 					<span class="font-mono text-xs text-accent/70 transition-colors group-hover:text-accent"
 						>0{i + 1}</span
 					>
-					<span>{route.name.replace('//', '').trim()}</span>
+					<span>{route.name}</span>
 				</a>
 			{/each}
 

@@ -45,6 +45,31 @@
 		}
 	});
 
+	// Shortcut da tastiera: 1-4 -> sezione corrispondente (coi numeri della navbar).
+	$effect(() => {
+		if (!browser) return;
+		const onKeydown = (e: KeyboardEvent) => {
+			if (e.metaKey || e.ctrlKey || e.altKey) return;
+			const target = e.target as HTMLElement | null;
+			if (
+				target &&
+				(target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)
+			)
+				return;
+			const idx = ['1', '2', '3', '4'].indexOf(e.key);
+			if (idx === -1) return;
+			const route = data.global?.navigation?.[idx];
+			if (!route) return;
+			const el = document.getElementById(route.link.replace('#', ''));
+			if (!el) return;
+			e.preventDefault();
+			const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+		};
+		window.addEventListener('keydown', onKeydown);
+		return () => window.removeEventListener('keydown', onKeydown);
+	});
+
 	// Initialize analytics on mount
 	$effect(() => {
 		if (browser) {

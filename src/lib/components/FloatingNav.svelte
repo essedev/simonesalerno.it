@@ -31,9 +31,9 @@
 		in:fade={{ duration: 300 }}
 		out:fade={{ duration: 200 }}
 	>
-		<nav class="pointer-events-auto rounded-lg bg-neutral-900/20">
+		<nav class="pointer-events-auto rounded-xl bg-neutral-900/20">
 			<div
-				class="flex items-center gap-5 rounded-lg border border-white/5 bg-white/[.03] px-5 py-2 text-base backdrop-blur-md"
+				class="flex items-center gap-5 rounded-xl border border-white/5 bg-white/[.03] px-5 py-2 text-base backdrop-blur-md"
 			>
 				<a
 					href={`${base}${page.url.pathname.split('/')[2] ? '/' + data.selectedLanguage : isLanguageCodeValid ? '/' + data.selectedLanguage + '#top' : '/' + 'en'}`}

@@ -7,6 +7,13 @@
 	--color-accent: #2cc3f7;
 	--color-accent-soft: #7dd9fb;
 	--font-mono: 'Martian Mono', ui-monospace, monospace;
+
+	/* Arrotondamento moderato in tutto il sito (via di mezzo tra il pill di prima e
+	   lo squadrato secco): override dei radius usati ovunque, da un solo punto. */
+	--radius-sm: 0.45rem;
+	--radius-md: 0.75rem;
+	--radius-lg: 1rem;
+	--radius-xl: 1.4rem;
 }
 
 html {

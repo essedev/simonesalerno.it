@@ -17,10 +17,10 @@
 		"affordable software"
 	],
 	"navigation": [
-		{ "name": "// projects", "link": "#projects" },
-		{ "name": "// about", "link": "#about" },
-		{ "name": "// blog", "link": "#blog" },
-		{ "name": "// contact", "link": "#contact" }
+		{ "name": "projects", "link": "#projects" },
+		{ "name": "about", "link": "#about" },
+		{ "name": "blog", "link": "#blog" },
+		{ "name": "contact", "link": "#contact" }
 	],
 	"interface": [
 		{ "name": "readMore", "value": "Read more" },

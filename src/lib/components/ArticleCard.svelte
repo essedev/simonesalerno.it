@@ -14,61 +14,42 @@
 		selectedLanguage
 	}: ArticleCardProps & { selectedLanguage?: string } = $props();
 
-	// Format date for display
 	const formatDate = (dateString: string) => {
 		const date = new Date(dateString);
-		let locale = 'en-US';
-		if (selectedLanguage === 'it') locale = 'it-IT';
-		return date.toLocaleDateString(locale, {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric'
-		});
+		const locale = selectedLanguage === 'it' ? 'it-IT' : 'en-US';
+		return date.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
 	};
 </script>
 
-<div
-	class="rounded-3xl border border-white/10 bg-white/[.01] backdrop-blur-md transition-all duration-300 ease-in-out hover:scale-105 hover:rotate-1"
+<a
+	href={`${base}${link}`}
+	class="group flex flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.02] transition-[transform,border-color] duration-200 ease-out hover:-translate-y-1 hover:border-accent/60"
 >
-	<a href={`${base}${link}`}>
-		<OptimizedImage
-			src={featuredImage}
-			alt={title}
-			className="aspect-video rounded-t-3xl saturate-[0.8] hover:saturate-100 transition-all duration-300 ease-in-out"
-			showPlaceholder={Boolean(featuredImagePlaceholder)}
-			sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-		/>
-	</a>
-	<div class="px-6 py-5">
-		<div class="mb-3 text-sm text-gray-400">
+	<OptimizedImage
+		src={featuredImage}
+		alt={title}
+		className="aspect-video saturate-[0.8] transition-all duration-300 group-hover:saturate-100"
+		showPlaceholder={Boolean(featuredImagePlaceholder)}
+		sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+	/>
+
+	<div class="flex flex-1 flex-col p-5">
+		<div class="mb-3 font-mono text-xs tracking-wider text-gray-500 uppercase">
 			{formatDate(publishedDate)}
 		</div>
 
-		<a href={`${base}${link}`}>
-			<h5 class="mb-2 text-2xl font-medium text-gray-100">
-				{title}
-			</h5>
-		</a>
-
-		<p class="mb-3 text-base text-gray-300 lg:text-xl">
-			{excerpt}
-		</p>
+		<h5 class="mb-2 text-xl font-medium text-gray-100">{title}</h5>
+		<p class="mb-4 text-sm text-gray-400">{excerpt}</p>
 
 		{#if tags && tags.length > 0}
-			<div class="flex flex-wrap items-center gap-2">
-				{#each tags.slice(0, 3) as tag (tag)}
-					<span class="rounded-full bg-white/5 px-3 py-1 text-xs text-gray-400">
-						{tag}
-					</span>
+			<div class="mt-auto flex flex-wrap gap-1.5 font-mono text-[0.7rem] text-gray-400">
+				{#each tags.slice(0, 4) as tag (tag)}
+					<span class="border border-white/10 px-2 py-0.5">{tag}</span>
 				{/each}
-				{#if tags.length > 3}
-					<span
-						class="flex h-6 w-6 items-center justify-center rounded-full bg-white/5 text-xs text-gray-400"
-					>
-						+{tags.length - 3}
-					</span>
+				{#if tags.length > 4}
+					<span class="px-1 py-0.5 text-gray-500">+{tags.length - 4}</span>
 				{/if}
 			</div>
 		{/if}
 	</div>
-</div>
+</a>
