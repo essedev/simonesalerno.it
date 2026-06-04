@@ -147,7 +147,15 @@ Design system di base, su cui la pixel art si poserà in seguito. Decisioni pres
   status "Esplorazione" per gli spike). È un lavoro di contenuto separato, a monte
   della scrittura, e richiede una selezione che spetta a Simone.
 
-## Stato
+## Stato (2026-06-04)
 
-- Voce + label "Esplorazione" già su `main` (deployate).
-- Branch `restyle/laboratory`: design system di base in corso.
+- Voce + label "Esplorazione" su `main` (deployate).
+- Branch `restyle/laboratory` (11 commit, non mergiato). **Fatto:** palette,
+  tipografia, hero, navbar (logo testuale + indice numerato + status bar + toggle
+  lingua), card progetti/articoli a scheda d'archivio + badge, filtri mono, footer,
+  floating squadrata, back-to-top, arrotondamento via token, shortcut tastiera
+  (1-4 sezioni, 0/Home top, End fondo), `//` rimosso dal content delle voci.
+- **Resta:** pagine dettaglio/about/contatti/paginazione/404; animazioni come
+  sistema; pixel art; contenuti progetti. Prima del merge: `build` + `test:ci`
+  (con E2E da aggiornare per nav/welcome/badge) + merge su `main`.
+- Log dettagliato in `docs/CYCLES.md` (Ciclo 9).

@@ -2,7 +2,7 @@
 
 Stato corrente del progetto. Milestone reali, non wishlist. Aggiornata insieme al codice.
 
-Ultimo aggiornamento: 2026-06-01
+Ultimo aggiornamento: 2026-06-04
 
 ## Contesto
 
@@ -113,7 +113,21 @@ Vedi `docs/CYCLES.md` per il log dettagliato del lavoro svolto.
   token sugli articoli, sezione "articoli simili", tag cliccabili sui dettagli verso
   la listing filtrata. Dettagli in `docs/CYCLES.md` (Ciclo 5).
 
+### M11 - Restyle "Laboratorio" - 🚧 In corso (branch `restyle/laboratory`)
+
+- Rebrand visivo verso un'identità "Laboratorio" (officina/sistema): palette nera +
+  azzurro elettrico, Martian Mono + IBM Plex Sans, hero "I cast code.", navbar con
+  logo testuale + indice numerato + status bar, card a scheda d'archivio, filtri mono,
+  footer ricco, shortcut tastiera. Vision e decisioni in `docs/RESTYLE.md`, log
+  dettagliato in `docs/CYCLES.md` (Ciclo 9).
+- Su `main`: welcome AI-first + label "Esplorazione" (pushati). Il resto vive sul
+  branch (11 commit, non mergiato).
+- Resta: pagine dettaglio/about/contatti/paginazione/404; animazioni come sistema;
+  pixel art autoprodotta; riscrittura/ricurazione dei contenuti progetti.
+
 ## Stato deploy
 
-Tutte le milestone (M1-M10) sono pushate su `main`. Il deploy avviene via Cloudflare
-Workers Builds al push (build ~11s con le OG ottimizzate).
+M1-M10 e il riposizionamento del welcome (parte di M11) sono pushate su `main`; il
+deploy avviene via Cloudflare Workers Builds al push. Il grosso del restyle (M11)
+e' sul branch `restyle/laboratory`, non ancora mergiato: prima del merge serve il
+giro `build` + `test:ci` (con alcuni E2E da aggiornare per nav/welcome/badge).

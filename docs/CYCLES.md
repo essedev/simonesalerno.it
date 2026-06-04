@@ -387,3 +387,68 @@ scheda (mancava `target="_blank"`), a differenza dei link in Contact e Footer.
 
 - `fix(projects)`: aggiunto `target="_blank"` + `rel="noopener noreferrer"` al
   link esterno in `Project.svelte`, allineandolo agli altri link esterni del sito.
+
+---
+
+## Ciclo 9 - Restyle "Laboratorio" (2026-06-04)
+
+### Obiettivo
+
+Rebrand visivo: da "dev portfolio dark generico" a un'identità "Laboratorio"
+coerente. Prima il messaggio (voce e posizionamento), poi il design system. La
+vision completa, le idee considerate e quelle scartate vivono in `docs/RESTYLE.md`.
+
+### Su `main` (pushato)
+
+- `feat(content)`: welcome riposizionato AI-first. Via il framing difensivo
+  ("l'architettura la decide l'umano, l'AI velocizza, l'umano valida") per uno
+  AI-first: l'umano progetta il sistema, l'AI scrive, l'output e' production-ready.
+- `feat(content)`: label dello status `idea` -> "Esplorazione" / "Exploration"
+  (la chiave interna resta `idea`).
+
+### Su branch `restyle/laboratory` (11 commit, NON mergiato)
+
+- **Palette:** nero piatto + accento **azzurro elettrico** `#2cc3f7` + pavimento in
+  prospettiva (griglia) + glow CRT dal basso. Via gradient blu e noise.
+- **Tipografia:** **Martian Mono** (titoli, etichette tech) + **IBM Plex Sans**
+  (body). Token radius (`--radius-md/lg/xl`) per arrotondamento moderato da un punto.
+- **Hero:** "I cast code." (mono, doppio senso cast), allineato a sinistra, firma in
+  calce "Simone Salerno · half engineer, half wizard".
+- **Navbar:** logo testuale `essedev_` (cursore blink), voci a indice numerato
+  (01-04), status bar sotto, toggle lingua `IT / EN` inline (al posto del dropdown).
+- **Card + StatusBadge:** scheda d'archivio (header stato + anno, tag mono, hover
+  bordo azzurro + lift); badge "riga di sistema" (dot + label mono); applicata anche
+  alla ArticleCard (header data).
+- **Filtri:** toolbar mono squadrata (SearchFilter + tutti i dropdown).
+- **Footer:** brand + tagline + nav numerata + riga di sistema. **FloatingNav**
+  squadrata coi numeri. **Back-to-top** squadrato.
+- **Shortcut tastiera:** `1-4` -> sezioni, `0`/`Home` -> top, `End` -> fondo
+  (reduced-motion aware). I numeri della navbar sono il promemoria degli shortcut.
+- **Coerenza:** `//` rimosso dal content delle voci (era decorazione fuori posto);
+  numeri solo dove servono.
+
+### Decisioni chiave (scartate, vedi RESTYLE.md)
+
+- Motif "doppia S" (richiama altro -> handle "essedev").
+- Font: Jacquard 12/24 (fantasy, non fitta); Fraunces italic (il serif-su-dark
+  grande e' l'estetica dei template generati da AI).
+- Colore: arancione (complementare al logo blu, ci litiga), viola (cliche'-AI),
+  blu-logo (generico) -> azzurro elettrico.
+- Animazioni custom dell'hero **congelate**: tararle alla cieca (senza vedere il
+  movimento negli screenshot) non converge; da rifare come sistema coerente.
+
+### Verifiche
+
+- `pnpm lint`: pulito; `pnpm check`: 0 errori (lungo tutti i commit del branch).
+- Shortcut testati via browser (`0`->top, `End`->fondo, `2`->sezione about).
+- **NON ancora fatto:** `pnpm build` + `pnpm test:ci` completo. Alcuni E2E vanno
+  aggiornati (cambiate voci nav, welcome, badge di stato).
+
+### Cosa resta
+
+- Pagine **dettaglio** (progetto/articolo, tag ancora pill), **about**, **contatti**,
+  **paginazione**, **404**.
+- Cantieri grossi: animazioni come sistema, pixel art autoprodotta (`idkcraft-studio`),
+  riscrittura/ricurazione dei contenuti progetti (decidere quali/quanti, usare lo
+  status "Esplorazione").
+- Prima del merge/live: `build` + `test:ci` + aggiornare gli E2E + merge su `main`.

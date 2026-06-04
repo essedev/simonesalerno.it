@@ -55,6 +55,20 @@ deploy avviene via Cloudflare Workers Builds al push, il gate di qualità è loc
 - Gotcha satori: font `woff`/`ttf` (mai `woff2`); dimensioni img nello `style`,
   non come attributi `width`/`height`.
 
+## Design system (restyle "Laboratorio")
+
+Rebrand visivo in corso sul branch `restyle/laboratory` (non ancora mergiato). Vision
+e decisioni in `docs/RESTYLE.md`, log in `docs/CYCLES.md` (Ciclo 9). In sintesi:
+
+- Font: **Martian Mono** (titoli, etichette, numeri) + **IBM Plex Sans** (body), via
+  Google Fonts in `app.html`.
+- Accento: azzurro elettrico `#2cc3f7` (`--color-accent`). Arrotondamento via token
+  `--radius-md/lg/xl` nel `@theme`: si regola da lì per tutto il sito.
+- Logo testuale `essedev_` (`Logo.svelte`), voci nav a indice numerato, status bar
+  sotto la navbar, toggle lingua `IT / EN` inline.
+- Shortcut tastiera (`+layout.svelte`): `1-4` -> sezioni, `0`/`Home` -> top,
+  `End` -> fondo.
+
 ## Convenzioni
 
 - `pnpm` sempre (mai npm/yarn). Tab, 100 colonne, single quote, no trailing comma
