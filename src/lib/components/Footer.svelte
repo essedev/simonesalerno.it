@@ -4,6 +4,7 @@
 	import type { FooterProps } from '$lib/types';
 	import { handleAnchorClick } from '$lib/utils';
 	import { getTranslation } from '$lib/utils/translations';
+	import { Code2, Map, Rss } from '@lucide/svelte';
 	import Logo from './Logo.svelte';
 	import MotionToggle from './ui/MotionToggle.svelte';
 
@@ -55,18 +56,34 @@
 			class="mt-10 flex flex-col gap-3 border-t border-white/5 pt-6 font-mono text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between"
 		>
 			<span>{copyrightText}</span>
-			<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+			<div class="flex flex-wrap items-center gap-2">
 				<a
 					href={`${base}/${data.selectedLanguage}/rss.xml`}
-					class="transition-colors hover:text-accent">RSS</a
+					target="_blank"
+					rel="noreferrer"
+					class="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 text-gray-400 transition-colors hover:border-accent/50 hover:text-accent"
 				>
-				<a href={`${base}/sitemap.xml`} class="transition-colors hover:text-accent">Sitemap</a>
+					<Rss class="h-3.5 w-3.5" />
+					RSS
+				</a>
+				<a
+					href={`${base}/sitemap.xml`}
+					target="_blank"
+					rel="noreferrer"
+					class="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 text-gray-400 transition-colors hover:border-accent/50 hover:text-accent"
+				>
+					<Map class="h-3.5 w-3.5" />
+					Sitemap
+				</a>
 				<a
 					href="https://github.com/essedev/simonesalerno.it"
 					target="_blank"
 					rel="noreferrer"
-					class="transition-colors hover:text-accent">Source</a
+					class="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 text-gray-400 transition-colors hover:border-accent/50 hover:text-accent"
 				>
+					<Code2 class="h-3.5 w-3.5" />
+					Source
+				</a>
 				<MotionToggle lang={data.selectedLanguage} />
 			</div>
 		</div>

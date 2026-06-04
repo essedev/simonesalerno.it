@@ -29,8 +29,23 @@
 <button
 	type="button"
 	onclick={toggle}
-	aria-pressed={enabled}
-	class="cursor-pointer transition-colors hover:text-white"
+	role="switch"
+	aria-checked={enabled}
+	aria-label={label}
+	class="group inline-flex cursor-pointer items-center gap-2 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 font-mono text-xs text-gray-400 transition-colors hover:border-accent/50 hover:text-gray-200"
 >
-	{label}: {enabled ? 'on' : 'off'}
+	<span>{label}</span>
+	<!-- Switch "meccanico" squadrato: track carbone, thumb pieno che scatta a
+	     destra e si accende in azzurro (mini glow CRT) quando le animazioni sono on. -->
+	<span
+		class="relative inline-flex h-4 w-7 items-center rounded-[5px] border px-[2px] transition-colors duration-200 {enabled
+			? 'border-accent/50 bg-accent/20'
+			: 'border-white/15 bg-white/5'}"
+	>
+		<span
+			class="h-2.5 w-2.5 rounded-[2px] transition-all duration-200 {enabled
+				? 'translate-x-[0.7rem] bg-accent shadow-[0_0_6px_rgba(44,195,247,0.7)]'
+				: 'translate-x-0 bg-white/40'}"
+		></span>
+	</span>
 </button>
