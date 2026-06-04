@@ -35,12 +35,17 @@
 
 			<!-- Navigazione -->
 			<nav class="flex flex-col gap-2 font-mono text-sm">
-				{#each data.global.navigation as route (route.name)}
+				{#each data.global.navigation as route, i (route.name)}
 					<a
 						href={`${base}/${data.selectedLanguage}${route.link}`}
 						onclick={handleAnchorClick}
-						class="text-gray-400 transition-colors hover:text-accent">{route.name}</a
+						class="group flex items-baseline gap-2 text-gray-400 transition-colors hover:text-accent"
 					>
+						<span class="text-xs text-accent/70 transition-colors group-hover:text-accent"
+							>0{i + 1}</span
+						>
+						<span>{route.name}</span>
+					</a>
 				{/each}
 			</nav>
 		</div>

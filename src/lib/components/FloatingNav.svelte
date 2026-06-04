@@ -46,12 +46,15 @@
 					>
 				</a>
 
-				{#each data.global.navigation as route (route.name)}
+				{#each data.global.navigation as route, i (route.name)}
 					<a
 						href={`${base}/${data.selectedLanguage}${route.link}`}
-						class="hidden px-3 sm:flex"
-						onclick={handleAnchorClick}>{route.name}</a
+						class="group hidden items-baseline gap-1.5 px-3 sm:flex"
+						onclick={handleAnchorClick}
 					>
+						<span class="font-mono text-xs text-accent/70 group-hover:text-accent">0{i + 1}</span>
+						<span>{route.name}</span>
+					</a>
 				{/each}
 
 				<div class="hidden sm:flex">
