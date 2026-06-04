@@ -7,29 +7,34 @@
 	import Logo from './Logo.svelte';
 	import MotionToggle from './ui/MotionToggle.svelte';
 
-	// Receive data as props from parent layout
 	let { data }: FooterProps = $props();
 
 	let isLanguageCodeValid = $derived(
 		data.languages.some((l) => l.code === page.url.pathname.split('/')[1])
 	);
 
-	// Get translation with type safety
 	let copyrightText = $derived(getTranslation(data.global, 'copyright'));
+
+	let homeHref = $derived(
+		`${base}${page.url.pathname.split('/')[2] ? '/' + data.selectedLanguage : isLanguageCodeValid ? '/' + data.selectedLanguage + '#top' : '/en'}`
+	);
 </script>
 
-<footer class="border-t border-white/5">
-	<div class="mx-auto w-full max-w-screen-2xl">
-		<nav class="flex items-start justify-between px-4 py-8 sm:px-8 sm:pt-10 sm:pb-8 lg:px-14">
-			<a
-				href={`${base}${page.url.pathname.split('/')[2] ? '/' + data.selectedLanguage : isLanguageCodeValid ? '/' + data.selectedLanguage + '#top' : '/' + 'en'}`}
-				onclick={handleAnchorClick}
-				aria-label="Logo"
-			>
-				<Logo />
-			</a>
+<footer class="mt-12 border-t border-white/5">
+	<div class="mx-auto w-full max-w-screen-2xl px-4 py-12 sm:px-8 lg:px-14">
+		<div class="flex flex-col justify-between gap-10 md:flex-row">
+			<!-- Brand -->
+			<div class="flex flex-col gap-3">
+				<a href={homeHref} onclick={handleAnchorClick} aria-label="essedev">
+					<Logo />
+				</a>
+				<p class="font-mono text-sm text-gray-500">
+					half engineer, <span class="text-accent">half wizard</span>
+				</p>
+			</div>
 
-			<div class="flex flex-col gap-x-7 gap-y-2 font-mono text-sm leading-none md:flex-row">
+			<!-- Navigazione -->
+			<nav class="flex flex-col gap-2 font-mono text-sm">
 				{#each data.global.navigation as route (route.name)}
 					<a
 						href={`${base}/${data.selectedLanguage}${route.link}`}
@@ -37,13 +42,15 @@
 						class="text-gray-400 transition-colors hover:text-accent">{route.name}</a
 					>
 				{/each}
-			</div>
-		</nav>
+			</nav>
+		</div>
+
+		<!-- Riga di sistema -->
 		<div
-			class="flex flex-col gap-3 px-4 pt-2 pb-7 font-mono text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-14"
+			class="mt-10 flex flex-col gap-3 border-t border-white/5 pt-6 font-mono text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between"
 		>
 			<span>{copyrightText}</span>
-			<div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+			<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
 				<a
 					href={`${base}/${data.selectedLanguage}/rss.xml`}
 					class="transition-colors hover:text-accent">RSS</a
