@@ -31,11 +31,9 @@
 		in:fade={{ duration: 300 }}
 		out:fade={{ duration: 200 }}
 	>
-		<nav
-			class="pointer-events-auto rounded-s-full rounded-e-none bg-neutral-900/20 sm:rounded-full"
-		>
+		<nav class="pointer-events-auto rounded-lg bg-neutral-900/20">
 			<div
-				class="flex items-center justify-between rounded-s-full rounded-e-none border border-white/5 bg-white/[.01] ps-8 pe-[calc(0.95rem+5vw)] text-lg backdrop-blur-md sm:rounded-full sm:bg-white/[.02] sm:px-4"
+				class="flex items-center gap-5 rounded-lg border border-white/5 bg-white/[.03] px-5 py-2 text-base backdrop-blur-md"
 			>
 				<a
 					href={`${base}${page.url.pathname.split('/')[2] ? '/' + data.selectedLanguage : isLanguageCodeValid ? '/' + data.selectedLanguage + '#top' : '/' + 'en'}`}
@@ -62,7 +60,6 @@
 						selectedLanguage={data.selectedLanguage}
 						navigation={data.navigation}
 						slugMap={data.slugMap}
-						isFloatingNav={true}
 					/>
 				</div>
 
