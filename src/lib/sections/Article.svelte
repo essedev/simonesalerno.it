@@ -92,11 +92,11 @@
 				</div>
 
 				{#if tagLinks.length > 0}
-					<div class="flex flex-wrap gap-2">
+					<div class="flex flex-wrap gap-1.5 font-mono text-xs text-gray-400">
 						{#each tagLinks as tag (tag.raw)}
 							<a
 								href={`${base}/${currentLang}/${blogRoute}?tags=${encodeURIComponent(tag.raw)}`}
-								class="rounded-full bg-gray-800 px-3 py-1 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-gray-100"
+								class="border border-white/10 px-2 py-1 transition-colors hover:border-accent/50 hover:text-accent"
 							>
 								{tag.label}
 							</a>
@@ -111,7 +111,7 @@
 					<OptimizedImage
 						src={content.meta.featured_image}
 						alt={currentTranslation.title}
-						className="aspect-video rounded-3xl"
+						className="aspect-video rounded-xl"
 						showPlaceholder={Boolean(content.meta.featuredImagePlaceholder)}
 						sizes="100vw"
 					/>
