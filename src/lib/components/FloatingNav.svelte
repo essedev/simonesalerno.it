@@ -43,7 +43,9 @@
 					onclick={handleAnchorClick}
 					aria-label="Logo"
 				>
-					<img class="h-10 w-10 object-contain" src="/logo/logo.png" alt="Logo" />
+					<span class="font-mono text-base font-semibold sm:text-lg"
+						>esse<span class="text-accent">dev</span></span
+					>
 				</a>
 
 				{#each data.global.navigation as route (route.name)}

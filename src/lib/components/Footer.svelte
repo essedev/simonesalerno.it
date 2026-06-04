@@ -20,9 +20,7 @@
 
 <footer class="border-t border-white/5">
 	<div class="mx-auto w-full max-w-screen-2xl">
-		<nav
-			class="flex items-start justify-between px-4 py-8 text-lg sm:px-8 sm:pt-10 sm:pb-8 sm:text-xl md:text-2xl lg:px-14"
-		>
+		<nav class="flex items-start justify-between px-4 py-8 sm:px-8 sm:pt-10 sm:pb-8 lg:px-14">
 			<a
 				href={`${base}${page.url.pathname.split('/')[2] ? '/' + data.selectedLanguage : isLanguageCodeValid ? '/' + data.selectedLanguage + '#top' : '/' + 'en'}`}
 				onclick={handleAnchorClick}
@@ -31,29 +29,31 @@
 				<Logo />
 			</a>
 
-			<div class="flex flex-col gap-x-7 gap-y-2 leading-none opacity-80 md:flex-row">
+			<div class="flex flex-col gap-x-7 gap-y-2 font-mono text-sm leading-none md:flex-row">
 				{#each data.global.navigation as route (route.name)}
-					<a href={`${base}/${data.selectedLanguage}${route.link}`} onclick={handleAnchorClick}
-						>{route.name}</a
+					<a
+						href={`${base}/${data.selectedLanguage}${route.link}`}
+						onclick={handleAnchorClick}
+						class="text-gray-400 transition-colors hover:text-accent">{route.name}</a
 					>
 				{/each}
 			</div>
 		</nav>
 		<div
-			class="text-md flex flex-col gap-3 px-4 pt-2 pb-7 text-neutral-200 opacity-70 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:text-lg lg:px-14"
+			class="flex flex-col gap-3 px-4 pt-2 pb-7 font-mono text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-14"
 		>
 			<span>{copyrightText}</span>
 			<div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
 				<a
 					href={`${base}/${data.selectedLanguage}/rss.xml`}
-					class="transition-colors hover:text-white">RSS</a
+					class="transition-colors hover:text-accent">RSS</a
 				>
-				<a href={`${base}/sitemap.xml`} class="transition-colors hover:text-white">Sitemap</a>
+				<a href={`${base}/sitemap.xml`} class="transition-colors hover:text-accent">Sitemap</a>
 				<a
 					href="https://github.com/essedev/simonesalerno.it"
 					target="_blank"
 					rel="noreferrer"
-					class="transition-colors hover:text-white">Source</a
+					class="transition-colors hover:text-accent">Source</a
 				>
 				<MotionToggle lang={data.selectedLanguage} />
 			</div>
