@@ -19,30 +19,30 @@
 </script>
 
 {#if totalPages > 1}
-	<nav class="flex items-center justify-center gap-4" aria-label="Pagination">
+	<nav class="flex items-center justify-center gap-4 font-mono" aria-label="Pagination">
 		<!-- Previous Page -->
 		<a
 			href={currentPage > 1 ? createPageLink(currentPage - 1) : '#'}
-			class="flex items-center gap-2 rounded-lg px-4 py-2 text-white/80 transition-colors hover:bg-white/10"
+			class="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/[0.02] text-gray-400 transition-colors hover:border-accent/50 hover:text-accent"
 			class:disabled={currentPage <= 1}
 			aria-label="Previous Page"
 		>
 			<ChevronLeft class="h-4 w-4" />
-			<span>Prev</span>
 		</a>
 
-		<span class="text-sm text-white/60">
-			Page {currentPage} of {totalPages}
+		<span class="text-sm tracking-wider text-gray-500">
+			<span class="text-accent">{String(currentPage).padStart(2, '0')}</span>
+			<span class="px-1 text-gray-600">/</span>
+			{String(totalPages).padStart(2, '0')}
 		</span>
 
 		<!-- Next Page -->
 		<a
 			href={currentPage < totalPages ? createPageLink(currentPage + 1) : '#'}
-			class="flex items-center gap-2 rounded-lg px-4 py-2 text-white/80 transition-colors hover:bg-white/10"
+			class="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/[0.02] text-gray-400 transition-colors hover:border-accent/50 hover:text-accent"
 			class:disabled={currentPage >= totalPages}
 			aria-label="Next Page"
 		>
-			<span>Next</span>
 			<ChevronRight class="h-4 w-4" />
 		</a>
 	</nav>
