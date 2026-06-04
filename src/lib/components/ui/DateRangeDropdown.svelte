@@ -96,7 +96,7 @@
 					type="date"
 					value={dateRange.from || ''}
 					onchange={(e) => onDateChange('from', e.currentTarget.value)}
-					class="date-input w-full rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-white backdrop-blur-sm focus:border-white/20 focus:outline-none"
+					class="date-input w-full rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-white backdrop-blur-sm focus:border-white/20 focus:outline-none"
 				/>
 			</div>
 			<div class="space-y-2">
@@ -106,14 +106,14 @@
 					type="date"
 					value={dateRange.to || ''}
 					onchange={(e) => onDateChange('to', e.currentTarget.value)}
-					class="date-input w-full rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-white backdrop-blur-sm focus:border-white/20 focus:outline-none"
+					class="date-input w-full rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-white backdrop-blur-sm focus:border-white/20 focus:outline-none"
 				/>
 			</div>
 			{#if hasDateRange && onClearDates}
 				<div class="border-t border-white/5 pt-3">
 					<button
 						onclick={onClearDates}
-						class="w-full cursor-pointer rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-white/80 backdrop-blur-sm transition-colors hover:bg-white/10"
+						class="w-full cursor-pointer rounded-md border border-white/10 bg-white/5 px-4 py-2 text-white/80 backdrop-blur-sm transition-colors hover:bg-white/10"
 					>
 						{t.clearDates}
 					</button>

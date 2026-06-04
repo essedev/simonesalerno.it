@@ -30,7 +30,7 @@
 		listItem: 'text-xl leading-relaxed',
 		quote: 'mb-6 border-l-4 border-gray-600 pl-6 text-gray-300 italic',
 		code: 'overflow-x-auto rounded-xl bg-gray-800/50 p-6 text-sm',
-		image: 'mx-auto max-w-full rounded-2xl',
+		image: 'mx-auto max-w-full rounded-xl',
 		divider: 'my-10 border-gray-700'
 	};
 
