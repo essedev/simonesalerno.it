@@ -47,7 +47,7 @@
 
 <div id="top" class="border-b border-white/5">
 	<div
-		class="mx-auto flex min-h-[80vh] w-full max-w-screen-2xl items-center justify-center px-4 sm:px-8 lg:px-14"
+		class="mx-auto flex min-h-[80vh] w-full max-w-screen-2xl items-center justify-start px-4 sm:px-8 lg:px-14"
 	>
 		<WelcomeSection welcome={data.welcome} />
 	</div>

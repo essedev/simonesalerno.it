@@ -40,6 +40,6 @@
 	/>
 
 	<p class="font-mono mt-10 text-sm text-gray-500">
-		{welcome.eyebrow} <span class="text-accent">· AI Engineer</span>
+		{welcome.eyebrow} · half engineer, <span class="text-accent">half wizard</span>
 	</p>
 </div>

@@ -122,6 +122,30 @@ body::after {
 	}
 }
 
+/* Cursore terminale del logo testuale */
+.blink-cursor {
+	animation: blink 1.1s step-end infinite;
+}
+
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html:not([data-motion='full']) .blink-cursor {
+		animation: none;
+	}
+}
+html[data-motion='reduced'] .blink-cursor {
+	animation: none;
+}
+
 /* Skip-to-content: nascosto fino a focus da tastiera */
 .skip-link {
 	position: fixed;

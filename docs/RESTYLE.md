@@ -129,9 +129,13 @@ Design system di base, su cui la pixel art si poserà in seguito. Decisioni pres
   screenshot) non converge: per ora hero con fade base sobrio, custom rimandate.
   Registro voluto: fluido ma non lento, easing che decelera (expoOut), non il
   "secco/veloce" che risultava brusco. `prefers-reduced-motion` gestito.
-- **Status bar:** una sottile barra di stato in basso, stile barra di un IDE
-  (build, lingua, ultimo aggiornamento) come tocco-firma.
-- **Navbar:** minimale, in alto.
+- **Navbar:** logo testuale temporaneo `essedev_` (mono, "dev" azzurro, cursore
+  lampeggiante; l'icona pixel Windows-95 stonava per palette e stile, tornerà con la
+  pixel art autoprodotta). Voci come indice numerato (`01 progetti`...) coi numeri
+  mono azzurri, lingua in mono. Hamburger sotto 1024px.
+- **Status bar:** fascia sotto la navbar (al posto del border piatto), stile barra
+  di stato IDE: dot azzurro + ruolo a sinistra, location/lingue a destra. La firma
+  dell'hero usa "half engineer, half wizard" per non duplicare il ruolo.
 - **Footer:** pannello tecnico (link, last-updated derivato dal git, motion toggle),
   in mono sobrio.
 

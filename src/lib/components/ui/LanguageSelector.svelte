@@ -53,7 +53,7 @@
 	<div>
 		<button
 			type="button"
-			class="flex w-16 cursor-pointer justify-center gap-x-1.5 border border-white/5 bg-white/[.02] backdrop-blur-md {isFloatingNav
+			class="flex w-16 cursor-pointer justify-center gap-x-1.5 border border-white/5 bg-white/[.02] font-mono backdrop-blur-md {isFloatingNav
 				? 'rounded-s-lg rounded-e-2xl pt-[0.5rem] pb-2 text-sm'
 				: 'rounded-lg py-3 text-base'}"
 			id="menu-button"
@@ -70,7 +70,7 @@
 		<div
 			in:fade={{ duration: 100 }}
 			out:fade={{ duration: 100 }}
-			class="absolute right-0 z-10 mt-1 w-16 origin-top-right rounded-lg border border-white/5 bg-white/[.02] text-base backdrop-blur-md"
+			class="absolute right-0 z-10 mt-1 w-16 origin-top-right rounded-lg border border-white/5 bg-white/[.02] font-mono text-base backdrop-blur-md"
 			role="menu"
 			aria-orientation="vertical"
 			aria-labelledby="menu-button"

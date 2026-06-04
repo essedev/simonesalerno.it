@@ -26,7 +26,7 @@
 
 <header id="top" class="border-b border-white/5">
 	<nav
-		class="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-4 py-8 sm:px-8 lg:px-14"
+		class="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-4 py-6 sm:px-8 lg:px-14"
 	>
 		<a
 			href={`${base}${page.url.pathname.split('/')[2] ? '/' + data.selectedLanguage : isLanguageCodeValid ? '/' + data.selectedLanguage + '#top' : '/' + 'en'}`}
@@ -37,12 +37,19 @@
 		</a>
 
 		<div
-			class="hidden items-center gap-x-5 text-[1.25rem] md:flex lg:gap-x-7 lg:text-[1.5rem] xl:gap-x-8"
+			class="hidden items-center gap-x-7 text-base whitespace-nowrap lg:flex lg:gap-x-9 lg:text-lg"
 		>
-			{#each data.global.navigation as route (route.name)}
-				<a href={`${base}/${data.selectedLanguage}${route.link}`} onclick={handleAnchorClick}
-					>{route.name}</a
+			{#each data.global.navigation as route, i (route.name)}
+				<a
+					href={`${base}/${data.selectedLanguage}${route.link}`}
+					onclick={handleAnchorClick}
+					class="group flex items-baseline gap-x-2 text-gray-400 transition-colors hover:text-white"
 				>
+					<span class="font-mono text-xs text-accent/70 transition-colors group-hover:text-accent"
+						>0{i + 1}</span
+					>
+					<span>{route.name.replace('//', '').trim()}</span>
+				</a>
 			{/each}
 
 			<div class="2xl:ms-2">
@@ -55,7 +62,7 @@
 			</div>
 		</div>
 
-		<div class="flex h-10 w-10 items-center justify-center md:hidden">
+		<div class="flex h-10 w-10 items-center justify-center lg:hidden">
 			{#if menuOpen}
 				<div class="fixed top-10 left-7 z-40" transition:fade={{ duration: 300 }}>
 					<LanguageSelector
@@ -94,4 +101,14 @@
 			{/if}
 		</div>
 	</nav>
+
+	<div
+		class="mx-auto flex w-full max-w-screen-2xl items-center justify-between border-t border-white/5 px-4 py-1.5 font-mono text-[0.7rem] tracking-wide text-gray-500 sm:px-8 lg:px-14"
+	>
+		<span class="flex items-center gap-x-2">
+			<span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+			AI Engineer @ Yellow Tech
+		</span>
+		<span class="hidden sm:block">Milano, IT &middot; IT / EN</span>
+	</div>
 </header>
