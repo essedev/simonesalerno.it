@@ -1,11 +1,12 @@
 {
-	"title": "Ciao, sono Simone.",
+	"eyebrow": "Simone Salerno",
+	"title": "I cast code.",
 	"description": {
 		"blocks": [
 			{
 				"type": "paragraph",
 				"data": {
-					"text": "AI Engineer. Decido l'architettura, l'AI scrive il codice, io controllo e rilascio. So dove sbaglia e la imposto perché non lo faccia."
+					"text": "Decido l'architettura, l'AI scrive il codice, io controllo e rilascio. So dove sbaglia e la imposto perché non lo faccia."
 				}
 			},
 			{

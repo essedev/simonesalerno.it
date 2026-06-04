@@ -1,11 +1,12 @@
 {
-	"title": "Hi, I'm Simone.",
+	"eyebrow": "Simone Salerno",
+	"title": "I cast code.",
 	"description": {
 		"blocks": [
 			{
 				"type": "paragraph",
 				"data": {
-					"text": "AI Engineer. I design the architecture, the AI writes the code, I review and ship. I know where it slips and I set it up so it doesn't."
+					"text": "I design the architecture, the AI writes the code, I review and ship. I know where it slips and I set it up so it doesn't."
 				}
 			},
 			{

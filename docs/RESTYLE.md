@@ -49,6 +49,22 @@ esplorazioni e cose finite. La narrazione esiste già nell'articolo
   Manifesto (editoriale type-driven). Scelta: Laboratorio come idea madre, con il
   linguaggio del Sistema nell'esecuzione. Il Manifesto è stato scartato perché
   dipende da contenuti forti ancora da scrivere.
+- **Font, due round di confronto sul nome:** (1) mono - Space Mono (il bold
+  schiacciava, il regular era smunto, niente pesi intermedi), JetBrains Mono, IBM
+  Plex Mono, VT323, Pixelify Sans: scelto **Martian Mono** per le etichette. (2)
+  serif per il titolo - Instrument Serif, Fraunces, Playfair, Spectral. Fraunces
+  italic montato sull'hero e poi **scartato in contesto**: il serif italic grande
+  su dark e' l'estetica dei template generati da AI (v0/artifacts), troppo
+  riconoscibile. Tornati a **Martian Mono** per titolo ed etichette.
+- **Headline dell'hero considerate:** "Ciao, sono Simone." (scartata: spreca il
+  punto di massima attenzione, il nome è già nel logo), "L'AI scrive. Io decido.",
+  "Architettura mia, codice suo.", "Half engineer, half wizard.", più "Welcome to
+  my lab" e "where code feels like magic" (scartate: cliché tech triti). Scelta:
+  **"I cast code."**
+- **Accento colore:** arancione deep (scartato: complementare al logo blu, ci
+  litigava), viola (scartato: armonizza col logo ma è il cliché-AI / purple
+  gradient), **ciano `#22d3ee`** (scelto: stessa famiglia fredda del logo,
+  retro-CRT, distintivo senza omologarsi all'estetica AI).
 
 ## Vision finale (fase futura): pixel art autoprodotta
 
@@ -61,7 +77,7 @@ pulita.
   human+AI in modo immediato.
 - **Scene animate** del lab (loop semplici: io che lavoro, il robottino che
   galleggia / emette una lucina, vapore, scintille).
-- **Perché è forte:** la firma visiva *dimostra* la tesi del welcome (l'umano
+- **Perché è forte:** la firma visiva _dimostra_ la tesi del welcome (l'umano
   imposta il sistema, l'AI genera, il processo deterministico valida) invece di
   descriverla a parole. Nessun altro portfolio ha questo.
 
@@ -82,18 +98,37 @@ Note di fattibilità (da tenere a mente quando ci arriveremo):
 Design system di base, su cui la pixel art si poserà in seguito. Decisioni prese:
 
 - **Colore:** dark, nero piatto (`#0c0c0c`) + superfici carbone/zinc + accento
-  arancione deep. Via il gradient blu e il noise generico. L'arancione (caldo, da
-  banco di lavoro/CRT) stacca dal blu che usano tutti.
-- **Tipografia:** Geist per il body, **Space Mono** come firma (titoli, etichette di
-  stato, metadati, numeri). Il mono è la voce del codice/laboratorio: tecnico, non
-  fantasy.
+  **azzurro elettrico** (`#2cc3f7`). Via il gradient blu di sfondo e il noise
+  generico. L'azzurro sta nella famiglia fredda del logo (coeso) ma saturo e
+  brillante (CRT/neon), non il blu desaturato generico. Glow azzurro dal basso come
+  orizzonte. Iter colore: arancione scartato (complementare al logo, ci litigava),
+  viola (cliché-AI), blu-logo (troppo generico/desaturato), azzurro elettrico vince.
+- **Tipografia:** **IBM Plex Sans** per il body (toglie il sapore Vercel di Geist),
+  **Martian Mono** per titoli ed etichette tech (firma, stato, metadati, numeri).
+  Mono geometrico "da officina", peso medium sul titolo. (Fraunces italic provato sul
+  titolo e scartato in contesto: il serif-su-dark grande dà l'aria "template generato
+  da AI". Il mono è meno elegante ma più specifico e meno omologato.)
+- **Headline hero:** titolo **"I cast code."** Doppio senso di `cast`: il type
+  casting della programmazione e il lanciare un incantesimo, il tocco magia senza
+  cringe. Resta in inglese anche in IT (brand statement intraducibile; il corpo sotto
+  è localizzato). Sostituisce "Ciao, sono Simone." (il nome era già nel logo). Layout
+  **allineato a sinistra** (editoriale, respiro a destra per la futura scena pixel
+  art), non centrato.
+- **Nome:** niente eyebrow-kicker sopra il titolo (troppo template e ridondante col
+  logo). Il nome è la **firma in calce** all'hero - "Simone Salerno · AI Engineer"
+  (mono, ruolo in azzurro): firma il pezzo invece di presentarsi.
+- **Sfondo:** nero piatto + griglia tecnica in prospettiva ancorata in basso
+  (il pavimento della "stanza") che sfuma salendo. Profondità di spazio senza
+  chiudersi a clessidra.
 - **Card:** squadrate, bordo 1px, intestazione in mono coi metadati (stato/anno).
-  Hover: il bordo prende l'arancione + micro-lift verticale. Niente rotazione.
+  Hover: il bordo prende l'azzurro + micro-lift verticale. Niente rotazione.
 - **Filtri:** logica invariata (è testata), restyle a "toolbar di strumenti":
-  label in mono, attivi in arancione.
-- **Motion:** secco e veloce (durate corte, easing lineare, niente rotazioni); idea
-  guida: i contenuti che si "caricano" in sequenza come in un terminale.
-  `prefers-reduced-motion` resta gestito.
+  label in mono, attivi in azzurro.
+- **Motion:** da rifare come SISTEMA coerente a fine restyle, non a mano sul singolo
+  componente. Tarare l'animazione alla cieca (senza vedere il movimento negli
+  screenshot) non converge: per ora hero con fade base sobrio, custom rimandate.
+  Registro voluto: fluido ma non lento, easing che decelera (expoOut), non il
+  "secco/veloce" che risultava brusco. `prefers-reduced-motion` gestito.
 - **Status bar:** una sottile barra di stato in basso, stile barra di un IDE
   (build, lingua, ultimo aggiornamento) come tocco-firma.
 - **Navbar:** minimale, in alto.

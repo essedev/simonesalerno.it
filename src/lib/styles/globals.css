@@ -2,6 +2,11 @@
 
 @theme {
 	--breakpoint-xs: 30rem;
+
+	/* Restyle "Laboratorio": accento arancione deep + firma monospace */
+	--color-accent: #2cc3f7;
+	--color-accent-soft: #7dd9fb;
+	--font-mono: 'Martian Mono', ui-monospace, monospace;
 }
 
 html {
@@ -11,7 +16,7 @@ html {
 
 body {
 	@apply overflow-x-hidden overscroll-none text-gray-100;
-	font-family: 'Geist', fantasy;
+	font-family: 'IBM Plex Sans', sans-serif;
 	font-optical-sizing: auto;
 	font-weight: 300;
 	font-style: normal;
@@ -20,24 +25,50 @@ body {
 	overscroll-behavior: none;
 	-webkit-overflow-scrolling: touch;
 
-	background:
-		radial-gradient(at 0% 90.67755657300366%, #20327e 0px, transparent 50%),
-		radial-gradient(at 96.57261361190224% 2.618933494998769%, #131b49 0px, transparent 50%),
-		radial-gradient(at 46.12884622549344% 45.14656319433538%, #000000 0px, transparent 50%) #0c0c0c;
+	background-color: #0c0c0c;
 }
 
+/* "Stanza" del laboratorio: griglia in prospettiva su pavimento e soffitto,
+   sfumata verso il centro dove vive il contenuto. Da' profondita' allo sfondo
+   invece di una texture piatta. */
 body::before {
+	/* Pavimento della "stanza": griglia in prospettiva ancorata in basso che
+	   sfuma salendo. Da' profondita' di spazio senza chiudersi a clessidra. */
 	content: '';
-	display: block;
 	position: fixed;
+	left: 50%;
+	bottom: 0;
 	z-index: -1;
-	top: 0;
+	width: 300vw;
+	height: 125vh;
+	margin-left: -150vw;
+	background-image:
+		linear-gradient(to right, rgba(255, 255, 255, 0.09) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+	background-size: 64px 64px;
+	transform-origin: center bottom;
+	transform: perspective(50vh) rotateX(60deg);
+	-webkit-mask-image: linear-gradient(to top, #000 0%, transparent 96%);
+	mask-image: linear-gradient(to top, #000 0%, transparent 96%);
+	pointer-events: none;
+}
+
+/* Orizzonte: glow arancione tenue dal basso, luce da officina/CRT in fondo alla
+   "stanza". Da' profondita' e calore al pavimento. */
+body::after {
+	content: '';
+	position: fixed;
 	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background: transparent url('/noise.png') 0 0;
-	background-size: 320px 320px;
-	opacity: 0.4;
+	right: 0;
+	bottom: 0;
+	height: 58vh;
+	z-index: -1;
+	background: radial-gradient(
+		ellipse 75% 100% at 50% 118%,
+		rgba(44, 195, 247, 0.18),
+		transparent 72%
+	);
+	pointer-events: none;
 }
 
 /* Classe utility per overlay fullscreen */

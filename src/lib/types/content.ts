@@ -72,6 +72,7 @@ export interface GlobalContent {
 
 // Page Content (Welcome, About, Contact, Projects, Blog)
 export interface WelcomeContent {
+	eyebrow: string;
 	title: string;
 	description: ContentBlocks;
 }

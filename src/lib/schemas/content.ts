@@ -78,6 +78,7 @@ export const GlobalContentSchema = z.object({
 
 // Page Content
 export const WelcomeContentSchema = z.object({
+	eyebrow: z.string().min(1),
 	title: z.string().min(1),
 	description: ContentBlocksSchema
 });
