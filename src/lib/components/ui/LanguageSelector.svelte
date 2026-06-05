@@ -24,14 +24,18 @@
 	}
 </script>
 
-<!-- Toggle lingua inline (IT / EN): attiva in accento, l'altra cliccabile. -->
-<div class="flex items-center gap-1.5 font-mono text-sm">
-	{#each languages as language, i (language.code)}
-		{#if i > 0}
-			<span class="text-white/20">/</span>
-		{/if}
+<!-- Selettore lingua come segmented control mono: cella attiva in accento,
+     l'altra spenta e cliccabile. -->
+<div
+	class="inline-flex items-center gap-0.5 rounded-md border border-white/10 bg-white/[0.02] p-0.5 font-mono text-xs"
+	role="group"
+	aria-label="Lingua"
+>
+	{#each languages as language (language.code)}
 		{#if language.code === selectedLanguage}
-			<span class="text-accent">{language.code.toUpperCase()}</span>
+			<span aria-current="true" class="rounded-sm bg-accent/15 px-2 py-0.5 text-accent"
+				>{language.code.toUpperCase()}</span
+			>
 		{:else}
 			{@const url = `${base}${buildLanguageUrl(language.code)}`}
 			<a
@@ -40,7 +44,8 @@
 					e.preventDefault();
 					goto(url, { noScroll: true });
 				}}
-				class="text-gray-500 transition-colors hover:text-white">{language.code.toUpperCase()}</a
+				class="rounded-sm px-2 py-0.5 text-gray-500 transition-colors hover:bg-white/5 hover:text-white"
+				>{language.code.toUpperCase()}</a
 			>
 		{/if}
 	{/each}

@@ -486,6 +486,9 @@ vision completa, le idee considerate e quelle scartate vivono in `docs/RESTYLE.m
 - **Menu mobile:** overlay rifatto - X allineata all'hamburger (prima `fixed` altrove,
   "saltava"), voci a indice numerato mono come la navbar, riga di sistema in fondo;
   l'accent picker si nasconde a menu aperto. Via il prop `isFloatingNavVisible`.
+- **Selettore lingua:** da `IT / EN` testo con slash (sembrava due link sciolti) a
+  segmented control mono bordato, cella attiva in accento - coerente con gli altri
+  controlli (navbar, floating nav, overlay mobile).
 
 ### Cosa resta
 
