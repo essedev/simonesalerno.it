@@ -35,6 +35,6 @@
 		status
 	]} {className}"
 >
-	<span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+	<span class="h-[7px] w-[7px] rounded-[1px] bg-current"></span>
 	{label}
 </span>
