@@ -68,7 +68,7 @@
 					aria-label="Menu"
 					aria-expanded="false"
 				>
-					<Menu class="h-8 w-8" />
+					<Menu class="h-7 w-7" />
 				</button>
 			{/if}
 		</div>
@@ -82,54 +82,54 @@
 	</div>
 
 	{#if menuOpen}
-		<!-- Overlay mobile autocontenuto: header (logo + X allineata all'hamburger),
-		     voci a indice numerato come la navbar, riga di sistema in fondo. -->
+		<!-- Overlay mobile autocontenuto: contenuto dentro lo stesso max-w-[90vw] del
+		     sito, cosi' logo e padding-x combaciano con la navbar (niente salto). -->
 		<div
-			class="fullscreen-overlay z-40 flex flex-col bg-black/90 backdrop-blur-md lg:hidden"
+			class="fullscreen-overlay z-40 bg-black/90 backdrop-blur-md lg:hidden"
 			transition:fade={{ duration: 200 }}
 		>
-			<div
-				class="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-4 py-6 sm:px-8"
-			>
-				<a
-					href={homeHref}
-					onclick={(event) => (handleAnchorClick(event), handleMenuClick())}
-					aria-label="Simone Salerno"
-				>
-					<Logo />
-				</a>
-				<button
-					onclick={handleMenuClick}
-					aria-label="Chiudi menu"
-					class="flex h-10 w-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
-				>
-					<X class="h-8 w-8" />
-				</button>
-			</div>
-
-			<nav class="flex flex-1 flex-col justify-center gap-y-7 px-4 font-mono sm:px-8">
-				{#each data.global.navigation as route, i (route.name)}
+			<div class="mx-auto flex h-full w-full max-w-[90vw] flex-col">
+				<div class="flex items-center justify-between px-4 py-6 sm:px-8">
 					<a
-						href={`${base}/${data.selectedLanguage}${route.link}`}
+						href={homeHref}
 						onclick={(event) => (handleAnchorClick(event), handleMenuClick())}
-						class="group flex items-baseline gap-4 text-3xl text-gray-200 transition-colors hover:text-white"
+						aria-label="Simone Salerno"
 					>
-						<span class="text-lg text-accent">0{i + 1}</span>
-						<span>{route.name}</span>
+						<Logo />
 					</a>
-				{/each}
-			</nav>
+					<button
+						onclick={handleMenuClick}
+						aria-label="Chiudi menu"
+						class="flex h-10 w-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
+					>
+						<X class="h-7 w-7" />
+					</button>
+				</div>
 
-			<div
-				class="flex items-center justify-between border-t border-white/5 px-4 py-6 font-mono text-xs text-gray-500 sm:px-8"
-			>
-				<span>Human vision &middot; <span class="text-accent">AI execution</span></span>
-				<LanguageSelector
-					languages={data.languages}
-					selectedLanguage={data.selectedLanguage}
-					navigation={data.navigation}
-					slugMap={data.slugMap}
-				/>
+				<nav class="flex flex-1 flex-col justify-center gap-y-7 px-4 font-mono sm:px-8">
+					{#each data.global.navigation as route, i (route.name)}
+						<a
+							href={`${base}/${data.selectedLanguage}${route.link}`}
+							onclick={(event) => (handleAnchorClick(event), handleMenuClick())}
+							class="group flex items-baseline gap-4 text-3xl text-gray-200 transition-colors hover:text-white"
+						>
+							<span class="text-lg text-accent">0{i + 1}</span>
+							<span>{route.name}</span>
+						</a>
+					{/each}
+				</nav>
+
+				<div
+					class="flex items-center justify-between border-t border-white/5 px-4 py-6 font-mono text-xs text-gray-500 sm:px-8"
+				>
+					<span>Human vision &middot; <span class="text-accent">AI execution</span></span>
+					<LanguageSelector
+						languages={data.languages}
+						selectedLanguage={data.selectedLanguage}
+						navigation={data.navigation}
+						slugMap={data.slugMap}
+					/>
+				</div>
 			</div>
 		</div>
 	{/if}
