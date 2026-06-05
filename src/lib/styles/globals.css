@@ -72,7 +72,7 @@ body::after {
 	z-index: -1;
 	background: radial-gradient(
 		ellipse 75% 100% at 50% 118%,
-		rgba(44, 195, 247, 0.18),
+		color-mix(in srgb, var(--color-accent) 18%, transparent),
 		transparent 72%
 	);
 	pointer-events: none;
@@ -209,4 +209,17 @@ html[data-motion='reduced'] *::after {
 }
 html[data-motion='reduced'] .inview-reveal {
 	opacity: 1 !important;
+}
+
+/* Eccezione: il thumb dello switch "Animazioni" e' un feedback funzionale e deve
+   scivolare anche con movimento ridotto (micro-movimento, non decorativo), cosi'
+   accendere e spegnere sono coerenti. Senza, spegnere applica data-motion='reduced'
+   che bloccherebbe l'animazione del thumb stesso. */
+@media (prefers-reduced-motion: reduce) {
+	html:not([data-motion='full']) .motion-thumb {
+		transition-property: translate, transform !important;
+	}
+}
+html[data-motion='reduced'] .motion-thumb {
+	transition-property: translate, transform !important;
 }
