@@ -2,7 +2,7 @@
 
 Stato corrente del progetto. Milestone reali, non wishlist. Aggiornata insieme al codice.
 
-Ultimo aggiornamento: 2026-06-04
+Ultimo aggiornamento: 2026-06-05
 
 ## Contesto
 
@@ -118,12 +118,14 @@ Vedi `docs/CYCLES.md` per il log dettagliato del lavoro svolto.
 - Rebrand visivo verso un'identità "Laboratorio" (officina/sistema): palette nera +
   azzurro elettrico, Martian Mono + IBM Plex Sans, hero "I cast code.", navbar con
   logo testuale + indice numerato + status bar, card a scheda d'archivio, filtri mono,
-  footer ricco, shortcut tastiera. Vision e decisioni in `docs/RESTYLE.md`, log
-  dettagliato in `docs/CYCLES.md` (Ciclo 9).
+  footer "dashboard", menu mobile a overlay. Pagine interne (dettaglio/about/contatti/
+  paginazione/404), bottoni uniformati a un solo standard, tema accento centralizzato e
+  **accent picker** runtime (azzurro default + arancione/viola, hue-sweep). Vision e
+  decisioni in `docs/RESTYLE.md`, log dettagliato in `docs/CYCLES.md` (Ciclo 9).
 - Su `main`: welcome AI-first + label "Esplorazione" (pushati). Il resto vive sul
-  branch (11 commit, non mergiato).
-- Resta: pagine dettaglio/about/contatti/paginazione/404; animazioni come sistema;
-  pixel art autoprodotta; riscrittura/ricurazione dei contenuti progetti.
+  branch (non mergiato).
+- Resta: animazioni come sistema coerente; pixel art autoprodotta; riscrittura/
+  ricurazione dei contenuti progetti.
 
 ## Stato deploy
 
