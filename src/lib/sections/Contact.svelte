@@ -1,26 +1,14 @@
 <script lang="ts">
 	import type { ContactSectionProps } from '$lib/types';
-	import { inview, type Options } from 'svelte-inview';
+	import { reveal } from '$lib/actions/reveal';
 
 	// Receive contact data as props
 	let { contact }: ContactSectionProps = $props();
-
-	let isInView = $state(false);
-	const options: Options = {
-		rootMargin: '-100px',
-		unobserveOnEnter: true
-	};
 </script>
 
 <div
-	use:inview={options}
-	oninview_change={(event) => {
-		const { inView } = event.detail;
-		isInView = inView;
-	}}
-	class="flex w-full flex-col justify-between gap-y-14 tracking-tight sm:gap-y-24 {isInView
-		? 'inview-reveal animate'
-		: 'inview-reveal opacity-0'}"
+	use:reveal
+	class="reveal flex w-full flex-col justify-between gap-y-14 tracking-tight sm:gap-y-24"
 >
 	<div class="flex flex-col gap-y-4 sm:gap-y-6">
 		<h3 class="text-[2.5rem] leading-none font-normal sm:text-5xl md:text-6xl 2xl:text-7xl">

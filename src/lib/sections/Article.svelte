@@ -7,7 +7,7 @@
 	import type { ArticleSectionProps } from '$lib/types';
 	import { getTranslation, translateTags } from '$lib/utils/translations';
 	import { contentMetrics } from '$lib/utils/content-metrics';
-	import { inview, type Options } from 'svelte-inview';
+	import { reveal } from '$lib/actions/reveal';
 
 	// Receive props from parent
 	let { content, currentLang, global, related, navigation }: ArticleSectionProps = $props();
@@ -16,12 +16,6 @@
 
 	// Get translation with type safety
 	let backText = $derived(getTranslation(global, 'back'));
-
-	let isInView = $state(false);
-	const options: Options = {
-		rootMargin: '-100px',
-		unobserveOnEnter: true
-	};
 
 	// Fallback per "Indietro" quando si atterra diretto sul dettaglio: la listing.
 	let blogUrl = $derived(`${base}/${currentLang}/${blogRoute}`);
@@ -47,14 +41,7 @@
 	}
 </script>
 
-<div
-	use:inview={options}
-	oninview_change={(event) => {
-		const { inView } = event.detail;
-		isInView = inView;
-	}}
-	class={isInView ? 'inview-reveal animate' : 'inview-reveal opacity-0'}
->
+<div use:reveal class="reveal">
 	<div class="flex pb-10 text-2xl 2xl:pb-14">
 		<BackLink href={blogUrl} label={backText} />
 	</div>

@@ -74,7 +74,6 @@
 	"dependencies": {
 		"@lucide/svelte": "^1.16.0",
 		"postprocessing": "^6.39.1",
-		"svelte-inview": "^4.0.4",
 		"three": "^0.184.0",
 		"zod": "^4.4.3"
 	},

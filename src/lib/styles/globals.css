@@ -3,7 +3,7 @@
 @theme {
 	--breakpoint-xs: 30rem;
 
-	/* Restyle "Laboratorio": accento arancione deep + firma monospace */
+	/* Restyle "Laboratorio": accento azzurro elettrico + firma monospace */
 	--color-accent: #2cc3f7;
 	--color-accent-soft: #7dd9fb;
 	--font-mono: 'Martian Mono', ui-monospace, monospace;
@@ -14,6 +14,11 @@
 	--radius-md: 0.75rem;
 	--radius-lg: 1rem;
 	--radius-xl: 1.4rem;
+
+	/* Motion: easing standard che decelera ("expoOut"), firma del movimento del
+	   sito. Usato da reveal, transizioni e micro-interazioni; da un solo punto.
+	   Tailwind genera l'utility `ease-out-expo`. */
+	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -103,17 +108,21 @@ body::after {
 	background: rgba(255, 255, 255, 0.08);
 }
 
-.animate {
-	animation: fadeIn 0.8s ease-in-out;
+/* Reveal-on-scroll unificato (action `reveal`): l'elemento entra con un fade +
+   un leggero scorrimento verticale, easing che decelera. Lo stato di partenza
+   vive qui (SSR-safe: parte invisibile come prima); l'action aggiunge
+   `is-visible` quando entra nel viewport. Stagger opzionale via transition-delay. */
+.reveal {
+	opacity: 0;
+	transform: translateY(1rem);
+	transition:
+		opacity 0.6s var(--ease-out-expo),
+		transform 0.6s var(--ease-out-expo);
 }
 
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+.reveal.is-visible {
+	opacity: 1;
+	transform: none;
 }
 
 .slide-in {
@@ -200,15 +209,17 @@ html[data-motion='reduced'] *::after {
 	scroll-behavior: auto !important;
 }
 
-/* Con movimento ridotto gli elementi con reveal-on-scroll restano visibili: senza
-   questo resterebbero opacity-0 finché non si scrolla ("spariscono e poi compaiono"). */
+/* Con movimento ridotto gli elementi con reveal-on-scroll restano visibili e fermi:
+   senza questo resterebbero opacity-0 + traslati ("spariscono e poi compaiono"). */
 @media (prefers-reduced-motion: reduce) {
-	html:not([data-motion='full']) .inview-reveal {
+	html:not([data-motion='full']) .reveal {
 		opacity: 1 !important;
+		transform: none !important;
 	}
 }
-html[data-motion='reduced'] .inview-reveal {
+html[data-motion='reduced'] .reveal {
 	opacity: 1 !important;
+	transform: none !important;
 }
 
 /* Eccezione: il thumb dello switch "Animazioni" e' un feedback funzionale e deve

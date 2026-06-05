@@ -7,19 +7,13 @@
 	import type { ProjectSectionProps } from '$lib/types';
 	import { getTranslation, translateTags } from '$lib/utils/translations';
 	import { ExternalLink } from '@lucide/svelte';
-	import { inview, type Options } from 'svelte-inview';
+	import { reveal } from '$lib/actions/reveal';
 
 	// Receive props from parent
 	let { content, currentLang, global, navigation }: ProjectSectionProps = $props();
 
 	// Get translation with type safety
 	let backText = $derived(getTranslation(global, 'back'));
-
-	let isInView = $state(false);
-	const options: Options = {
-		rootMargin: '-100px',
-		unobserveOnEnter: true
-	};
 
 	let currentTranslation = $derived(content.translations[currentLang]);
 	let projectsRoute = $derived(navigation?.[currentLang]?.projects ?? 'projects');
@@ -34,14 +28,7 @@
 	);
 </script>
 
-<div
-	use:inview={options}
-	oninview_change={(event) => {
-		const { inView } = event.detail;
-		isInView = inView;
-	}}
-	class={isInView ? 'inview-reveal animate' : 'inview-reveal opacity-0'}
->
+<div use:reveal class="reveal">
 	<div class="flex pb-10 text-2xl 2xl:pb-14">
 		<BackLink href={projectsUrl} label={backText} />
 	</div>

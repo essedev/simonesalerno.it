@@ -6,7 +6,7 @@
 	import type { ArticlesSectionProps, FilterState } from '$lib/types/content';
 	import { getTranslations, translateTags, type TranslationKey } from '$lib/utils/translations';
 	import { ArrowRight, FileText } from '@lucide/svelte';
-	import { inview, type Options } from 'svelte-inview';
+	import { reveal } from '$lib/actions/reveal';
 
 	// Receive data as props
 	let {
@@ -25,12 +25,6 @@
 		activeFilters?: FilterState;
 		availableTags?: string[];
 	} = $props();
-
-	let isInView = $state(false);
-	const options: Options = {
-		rootMargin: '-100px',
-		unobserveOnEnter: true
-	};
 
 	// The `articles` prop now contains only the items for the current page.
 	// We can still apply a language filter for robustness, though data should be pre-filtered.
@@ -56,14 +50,7 @@
 	);
 </script>
 
-<div
-	use:inview={options}
-	oninview_change={(event) => {
-		const { inView } = event.detail;
-		isInView = inView;
-	}}
-	class="flex flex-col gap-y-10 sm:gap-y-16 2xl:gap-y-[4.5rem] {isInView ? 'animate' : 'opacity-0'}"
->
+<div use:reveal class="reveal flex flex-col gap-y-10 sm:gap-y-16 2xl:gap-y-[4.5rem]">
 	<h2 class="text-[2.5rem] leading-none font-normal sm:text-5xl md:text-6xl 2xl:text-7xl">
 		{blogPage.title}
 	</h2>
