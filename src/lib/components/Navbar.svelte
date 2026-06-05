@@ -9,11 +9,7 @@
 	import LanguageSelector from './ui/LanguageSelector.svelte';
 
 	// Ricevi dati come props
-	let {
-		data,
-		menuOpen = $bindable(),
-		isFloatingNavVisible = false
-	}: { data: LayoutData; menuOpen: boolean; isFloatingNavVisible?: boolean } = $props();
+	let { data, menuOpen = $bindable() }: { data: LayoutData; menuOpen: boolean } = $props();
 
 	function handleMenuClick() {
 		menuOpen = !menuOpen;
@@ -22,17 +18,18 @@
 	let isLanguageCodeValid = $derived(
 		data.languages.some((l) => l.code === page.url.pathname.split('/')[1])
 	);
+
+	// Stessa destinazione del logo, riusata dall'overlay mobile.
+	let homeHref = $derived(
+		`${base}${page.url.pathname.split('/')[2] ? '/' + data.selectedLanguage : isLanguageCodeValid ? '/' + data.selectedLanguage + '#top' : '/' + 'en'}`
+	);
 </script>
 
 <header id="top" class="border-b border-white/5">
 	<nav
 		class="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-4 py-6 sm:px-8 lg:px-14"
 	>
-		<a
-			href={`${base}${page.url.pathname.split('/')[2] ? '/' + data.selectedLanguage : isLanguageCodeValid ? '/' + data.selectedLanguage + '#top' : '/' + 'en'}`}
-			onclick={handleAnchorClick}
-			aria-label="Simone Salerno"
-		>
+		<a href={homeHref} onclick={handleAnchorClick} aria-label="Simone Salerno">
 			<Logo />
 		</a>
 
@@ -62,41 +59,16 @@
 			</div>
 		</div>
 
+		<!-- Hamburger: stessa cella (px + py) della X nell'overlay, cosi' aprendo non salta. -->
 		<div class="flex h-10 w-10 items-center justify-center lg:hidden">
-			{#if menuOpen}
-				<div class="fixed top-10 left-7 z-40" transition:fade={{ duration: 300 }}>
-					<LanguageSelector
-						languages={data.languages}
-						selectedLanguage={data.selectedLanguage}
-						navigation={data.navigation}
-						slugMap={data.slugMap}
-					/>
-				</div>
-
+			{#if !menuOpen}
 				<button
-					class={`fixed top-[2.8rem] z-40 flex h-10 w-10 items-center justify-center ${isFloatingNavVisible ? 'right-4' : 'right-9'}`}
-					transition:fade={{ duration: 300 }}
+					transition:fade={{ duration: 150 }}
 					onclick={handleMenuClick}
+					aria-label="Menu"
+					aria-expanded="false"
 				>
-					<X class="h-9 w-9" />
-				</button>
-
-				<div
-					class="fullscreen-overlay z-30 flex flex-col items-center justify-center bg-black/60 text-2xl backdrop-blur-sm"
-					transition:fade={{ duration: 300 }}
-				>
-					<div class="flex flex-col gap-y-3">
-						{#each data.global.navigation as route (route.name)}
-							<a
-								href={`${base}/${data.selectedLanguage}${route.link}`}
-								onclick={(event) => (handleAnchorClick(event), handleMenuClick())}>{route.name}</a
-							>
-						{/each}
-					</div>
-				</div>
-			{:else}
-				<button transition:fade={{ duration: 300 }} onclick={handleMenuClick}>
-					<Menu class="h-9 w-9" />
+					<Menu class="h-8 w-8" />
 				</button>
 			{/if}
 		</div>
@@ -108,4 +80,57 @@
 		<span>Human vision &middot; <span class="text-accent">AI execution</span></span>
 		<span class="hidden sm:block">Milano, IT</span>
 	</div>
+
+	{#if menuOpen}
+		<!-- Overlay mobile autocontenuto: header (logo + X allineata all'hamburger),
+		     voci a indice numerato come la navbar, riga di sistema in fondo. -->
+		<div
+			class="fullscreen-overlay z-40 flex flex-col bg-black/90 backdrop-blur-md lg:hidden"
+			transition:fade={{ duration: 200 }}
+		>
+			<div
+				class="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-4 py-6 sm:px-8"
+			>
+				<a
+					href={homeHref}
+					onclick={(event) => (handleAnchorClick(event), handleMenuClick())}
+					aria-label="Simone Salerno"
+				>
+					<Logo />
+				</a>
+				<button
+					onclick={handleMenuClick}
+					aria-label="Chiudi menu"
+					class="flex h-10 w-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
+				>
+					<X class="h-8 w-8" />
+				</button>
+			</div>
+
+			<nav class="flex flex-1 flex-col justify-center gap-y-7 px-4 font-mono sm:px-8">
+				{#each data.global.navigation as route, i (route.name)}
+					<a
+						href={`${base}/${data.selectedLanguage}${route.link}`}
+						onclick={(event) => (handleAnchorClick(event), handleMenuClick())}
+						class="group flex items-baseline gap-4 text-3xl text-gray-200 transition-colors hover:text-white"
+					>
+						<span class="text-lg text-accent">0{i + 1}</span>
+						<span>{route.name}</span>
+					</a>
+				{/each}
+			</nav>
+
+			<div
+				class="flex items-center justify-between border-t border-white/5 px-4 py-6 font-mono text-xs text-gray-500 sm:px-8"
+			>
+				<span>Human vision &middot; <span class="text-accent">AI execution</span></span>
+				<LanguageSelector
+					languages={data.languages}
+					selectedLanguage={data.selectedLanguage}
+					navigation={data.navigation}
+					slugMap={data.slugMap}
+				/>
+			</div>
+		</div>
+	{/if}
 </header>

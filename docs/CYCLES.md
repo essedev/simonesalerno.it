@@ -483,6 +483,9 @@ vision completa, le idee considerate e quelle scartate vivono in `docs/RESTYLE.m
 - **Fix switch animazioni:** il thumb scivola in accensione E spegnimento (prima
   spegnere applicava `data-motion=reduced` che ne congelava l'animazione; eccezione
   mirata sul thumb, sulla proprietà `translate` - Tailwind v4 non usa `transform`).
+- **Menu mobile:** overlay rifatto - X allineata all'hamburger (prima `fixed` altrove,
+  "saltava"), voci a indice numerato mono come la navbar, riga di sistema in fondo;
+  l'accent picker si nasconde a menu aperto. Via il prop `isFloatingNavVisible`.
 
 ### Cosa resta
 
