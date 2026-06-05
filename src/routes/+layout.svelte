@@ -4,6 +4,7 @@
 	import FloatingNav from '$lib/components/FloatingNav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import AccentPicker from '$lib/components/ui/AccentPicker.svelte';
 	import BackToTop from '$lib/components/ui/BackToTop.svelte';
 	import '$lib/styles/globals.css';
 	import { initializeAnalytics, isAnalyticsReady, trackPageView } from '$lib/utils/analytics';
@@ -333,4 +334,6 @@
 	{#if scrollY > 350 && !menuOpen}
 		<BackToTop global={data.global} />
 	{/if}
+
+	<AccentPicker lang={currentLocale} />
 </div>
