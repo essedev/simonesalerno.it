@@ -105,10 +105,7 @@
 	<div
 		class="mx-auto flex w-full max-w-screen-2xl items-center justify-between border-t border-white/5 px-4 py-1.5 font-mono text-[0.7rem] tracking-wide text-gray-500 sm:px-8 lg:px-14"
 	>
-		<span class="flex items-center gap-x-2">
-			<span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
-			AI Engineer @ Yellow Tech
-		</span>
-		<span class="hidden sm:block">Milano, IT &middot; IT / EN</span>
+		<span>Human vision &middot; <span class="text-accent">AI execution</span></span>
+		<span class="hidden sm:block">Milano, IT</span>
 	</div>
 </header>
