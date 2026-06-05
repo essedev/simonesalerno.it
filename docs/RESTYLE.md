@@ -147,7 +147,7 @@ Design system di base, su cui la pixel art si poserà in seguito. Decisioni pres
   status "Esplorazione" per gli spike). È un lavoro di contenuto separato, a monte
   della scrittura, e richiede una selezione che spetta a Simone.
 
-## Stato (2026-06-04)
+## Stato (2026-06-05)
 
 - Voce + label "Esplorazione" su `main` (deployate).
 - Branch `restyle/laboratory` (non mergiato). **Fatto:** palette, tipografia, hero,
@@ -157,6 +157,12 @@ Design system di base, su cui la pixel art si poserà in seguito. Decisioni pres
   0/Home top, End fondo), `//` rimosso dal content. Pagine dettaglio (tag mono
   squadrati + immagine a token), paginazione a indice numerato (`01 / 04`, accento),
   404 in mono accent, link contatti e chip filtri allineati all'accento.
+- **Polish (blocco 2):** footer "dashboard" (link a moduli con icona, switch
+  meccanico), bottoni uniformati a un solo standard, sitemap restilizzata, status bar
+  col claim `Human vision · AI execution` (via dot e lingua duplicata), StatusBadge a
+  quadratino, tema accento centralizzato (`color-mix` dal token) e **accent picker**
+  runtime (azzurro default + arancione/viola, hue sweep animato, flottante basso-sx,
+  persistente, rispetta il motion toggle).
 - **Resta:** animazioni come sistema; pixel art; contenuti progetti. Prima del merge:
   `build` + `test:ci` (con E2E da aggiornare per nav/welcome/badge) + merge su `main`.
 - Log dettagliato in `docs/CYCLES.md` (Ciclo 9).

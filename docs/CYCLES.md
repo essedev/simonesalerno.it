@@ -459,6 +459,31 @@ vision completa, le idee considerate e quelle scartate vivono in `docs/RESTYLE.m
   bottoni X di rimozione filtro `rounded-sm` (erano `rounded-full`) e accento (era
   `blue-400`).
 
+### Blocco 2 - polish: footer, controlli, tema accento (fatto)
+
+- **Footer "dashboard":** RSS/Sitemap/Source come moduli squadrati con icona (mono,
+  hover accento), aprono in nuova tab (risorse XML, niente redirect). MotionToggle =
+  bottone con switch meccanico squadrato (thumb pieno + glow CRT quando on).
+- **Bottoni uniformati:** un solo standard ovunque (`bg-white/[0.02]`, bordo
+  `white/10`, `hover:border-accent/50`, `rounded-md`; hover-fill `text-accent` per i
+  link, `bg-white/10` per i controlli). Rientrati gli outlier di opacità/superficie.
+- **Sitemap:** CSS rifatto sul tema (nero + glow, Martian Mono, loc/label accento,
+  card squadrate con hover).
+- **Status bar:** claim `Human vision · AI execution` + location; via il dot
+  decorativo e il `IT / EN` morto (duplicava il selettore lingua vero sopra).
+- **StatusBadge:** dot tondo -> quadratino (coerente col linguaggio squadrato).
+- **Tema accento centralizzato:** glow e ombre derivano da `var(--color-accent)` via
+  `color-mix`; la sitemap (CSS separato) da un `--accent` locale. L'accento vive in
+  un solo punto.
+- **Accent picker (feature):** selettore flottante in basso a sinistra, azzurro
+  default + arancione/viola. Sovrascrive `--color-accent` a runtime (tutto il sito
+  cambia live); il cambio è una "ricalibrazione dell'hue" (sweep HSL, percorso più
+  breve, snap esatto) e l'anello di selezione scivola. Persistente in localStorage,
+  rispetta il motion toggle. OG/identità restano sull'azzurro default.
+- **Fix switch animazioni:** il thumb scivola in accensione E spegnimento (prima
+  spegnere applicava `data-motion=reduced` che ne congelava l'animazione; eccezione
+  mirata sul thumb, sulla proprietà `translate` - Tailwind v4 non usa `transform`).
+
 ### Cosa resta
 
 - Cantieri grossi: animazioni come sistema, pixel art autoprodotta (`idkcraft-studio`),
