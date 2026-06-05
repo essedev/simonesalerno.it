@@ -1,57 +1,14 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { ACCENT_THEMES, ACCENT_COOKIE, type AccentTheme } from '$lib/themes';
+	import { untrack } from 'svelte';
 
-	let { lang = 'it' }: { lang?: string } = $props();
+	// `accent` arriva dal layout (cookie risolto in SSR): l'indicatore parte gia'
+	// sulla selezione giusta e il colore e' applicato pre-paint sull'attributo style
+	// di <html>, quindi qui non serve ne' rileggere lo storage ne' ri-applicarlo al load.
+	let { accent = 'blue', lang = 'it' }: { accent?: string; lang?: string } = $props();
 
-	type Theme = {
-		id: string;
-		accent: string;
-		soft: string;
-		h: number;
-		s: number;
-		l: number;
-		it: string;
-		en: string;
-	};
-
-	// I tre accenti. 'blue' e' il default del brand (gia' nel token CSS e usato dalle
-	// OG pre-generate); gli altri sono variazioni scelte dal visitatore. Sovrascrivere
-	// --color-accent su <html> cambia tutto il sito (text/border/bg-accent, glow e
-	// ombre derivano dal token). Ogni tema porta anche HSL per animare la transizione.
-	const THEMES: Theme[] = [
-		{
-			id: 'blue',
-			accent: '#2cc3f7',
-			soft: '#7dd9fb',
-			h: 197,
-			s: 92,
-			l: 57,
-			it: 'Azzurro',
-			en: 'Blue'
-		},
-		{
-			id: 'orange',
-			accent: '#ff7a1a',
-			soft: '#ffae73',
-			h: 28,
-			s: 100,
-			l: 55,
-			it: 'Arancione',
-			en: 'Orange'
-		},
-		{
-			id: 'violet',
-			accent: '#a855f7',
-			soft: '#c9a8fb',
-			h: 271,
-			s: 91,
-			l: 65,
-			it: 'Viola',
-			en: 'Violet'
-		}
-	];
-
-	let active = $state('blue');
+	// Valore iniziale dalla prop; poi `active` e' gestito localmente da select().
+	let active = $state(untrack(() => accent));
 	let rafId = 0;
 
 	function setVars(accent: string, soft: string) {
@@ -72,7 +29,7 @@
 
 	// "Ricalibrazione dell'hue": ruota la tinta dal colore attuale al nuovo lungo il
 	// percorso piu' breve del cerchio cromatico, poi fa snap al valore esatto.
-	function animateTo(from: Theme, to: Theme) {
+	function animateTo(from: AccentTheme, to: AccentTheme) {
 		cancelAnimationFrame(rafId);
 		let dh = to.h - from.h;
 		if (dh > 180) dh -= 360;
@@ -95,27 +52,21 @@
 		rafId = requestAnimationFrame(step);
 	}
 
-	// All'avvio ripristina la scelta salvata, sempre istantaneo (niente sweep al load).
-	$effect(() => {
-		if (!browser) return;
-		const stored = localStorage.getItem('accent');
-		const theme = THEMES.find((t) => t.id === stored) ?? THEMES[0];
-		active = theme.id;
-		setVars(theme.accent, theme.soft);
-		return () => cancelAnimationFrame(rafId);
-	});
-
-	function select(theme: Theme) {
-		const from = THEMES.find((t) => t.id === active) ?? THEMES[0];
+	function select(theme: AccentTheme) {
+		const from = ACCENT_THEMES.find((t) => t.id === active) ?? ACCENT_THEMES[0];
 		if (theme.id === active) return;
 		active = theme.id;
-		localStorage.setItem('accent', theme.id);
+		// Cookie (non localStorage): leggibile dal server, applica il tema in SSR.
+		document.cookie = `${ACCENT_COOKIE}=${theme.id}; path=/; max-age=31536000; samesite=lax`;
 		if (motionReduced()) setVars(theme.accent, theme.soft);
 		else animateTo(from, theme);
 	}
 
+	// Cleanup client-only del raf in volo (in un $effect, cosi' non gira in SSR).
+	$effect(() => () => cancelAnimationFrame(rafId));
+
 	let labelPrefix = $derived(lang === 'en' ? 'Accent' : 'Accento');
-	let activeIndex = $derived(THEMES.findIndex((t) => t.id === active));
+	let activeIndex = $derived(ACCENT_THEMES.findIndex((t) => t.id === active));
 </script>
 
 <div
@@ -128,7 +79,7 @@
 		class="pointer-events-none absolute top-1.5 left-1.5 h-5 w-5 rounded-sm ring-2 ring-white/80 ring-offset-2 ring-offset-black transition-transform duration-300 ease-out"
 		style="transform: translateX({activeIndex * 26}px);"
 	></span>
-	{#each THEMES as theme (theme.id)}
+	{#each ACCENT_THEMES as theme (theme.id)}
 		<button
 			type="button"
 			onclick={() => select(theme)}

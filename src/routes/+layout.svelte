@@ -336,6 +336,6 @@
 	{/if}
 
 	{#if !menuOpen}
-		<AccentPicker lang={currentLocale} />
+		<AccentPicker accent={data.accent} lang={currentLocale} />
 	{/if}
 </div>
