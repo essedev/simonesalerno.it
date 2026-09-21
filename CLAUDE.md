@@ -65,15 +65,15 @@ e decisioni in `docs/RESTYLE.md`, log in `docs/CYCLES.md` (Ciclo 9). In sintesi:
 - Accento e arrotondamento da token nel `@theme` (`src/lib/styles/globals.css`):
   `--color-accent` (default azzurro `#2cc3f7`) + `--radius-sm/md/lg/xl`. **L'accento
   vive in un punto solo:** glow e ombre lo derivano via `color-mix(var(--color-accent))`,
-  non hardcodano l'rgba. La sitemap e' un CSS separato (`static/sitemap.css`) col suo
+  non hardcodano l'rgba. La sitemap è un CSS separato (`static/sitemap.css`) col suo
   `--accent`. Un `AccentPicker` (montato in `+layout.svelte`, basso-sx) sovrascrive
   `--color-accent` su `<html>` a runtime (azzurro/arancione/viola, persistito in
   localStorage, con hue-sweep animato): se aggiungi un colore-accento NON hardcodarlo.
 - Controlli a tema coerenti (`rounded-md`, bordo `white/10`, `hover:border-accent/50`):
   segmented control lingua, switch animazioni (`MotionToggle`), accent picker. Le
-  animazioni rispettano il motion toggle; il thumb dello switch e' esentato apposta
+  animazioni rispettano il motion toggle; il thumb dello switch è esentato apposta
   (vedi `.motion-thumb` in globals - Tailwind v4 anima `translate`, non `transform`).
-- Logo testuale `essedev_` (`Logo.svelte`), voci nav a indice numerato, status bar
+- Logo testuale `essedev` (`Logo.svelte`), voci nav a indice numerato, status bar
   sotto la navbar (claim del sito), menu mobile a overlay numerato dentro `max-w-[90vw]`.
 - Shortcut tastiera (`+layout.svelte`): `1-4` -> sezioni, `0`/`Home` -> top,
   `End` -> fondo.
