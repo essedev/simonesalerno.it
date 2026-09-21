@@ -45,3 +45,4 @@ src/lib/assets/image-assets.ts
 /blob-report
 /playwright/.cache
 /coverage
+.playwright-mcp/

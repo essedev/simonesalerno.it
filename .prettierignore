@@ -11,3 +11,8 @@ bun.lockb
 # Auto-generated
 src/lib/content/slug-map.json
 src/lib/assets/image-assets.ts
+.playwright-mcp/
+
+# Mockup di concept: HTML autonomi, si guardano e si buttano
+docs/concepts/
+docs/archive/
