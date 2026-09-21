@@ -69,7 +69,7 @@
 		aria-haspopup="listbox"
 		aria-controls={dropdownId}
 		onclick={toggleDropdown}
-		class="flex w-full cursor-pointer items-center gap-2 rounded-md border border-white/10 bg-white/[0.02] px-4 py-2 font-mono text-sm text-white/80 backdrop-blur-md transition-colors hover:border-accent/50 hover:bg-white/10"
+		class="flex w-full cursor-pointer items-center gap-2 rounded-md border border-white/10 bg-white/[0.02] px-4 py-2 font-mono text-sm text-white/80 backdrop-blur-md transition-colors duration-200 hover:border-accent/50 hover:bg-white/[0.045]"
 		style="touch-action: manipulation;"
 	>
 		<Tag class="h-4 w-4" />
@@ -130,7 +130,7 @@
 			<div class="border-t border-white/5 p-2">
 				<button
 					onclick={onClearTags}
-					class="w-full cursor-pointer rounded-md border border-white/10 bg-white/[0.02] px-4 py-2 text-white/80 backdrop-blur-sm transition-colors hover:border-accent/50 hover:bg-white/10"
+					class="w-full cursor-pointer rounded-md border border-white/10 bg-white/[0.02] px-4 py-2 text-white/80 backdrop-blur-sm transition-colors duration-200 hover:border-accent/50 hover:bg-white/[0.045]"
 				>
 					{t.clearTags}
 				</button>

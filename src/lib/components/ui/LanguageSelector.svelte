@@ -22,18 +22,36 @@
 			targetLang
 		});
 	}
+
+	// Posizione dell'indicatore che scivola sotto la lingua attiva.
+	let activeIndex = $derived(
+		Math.max(
+			0,
+			languages.findIndex((l) => l.code === selectedLanguage)
+		)
+	);
 </script>
 
-<!-- Selettore lingua come segmented control mono: cella attiva in accento,
-     l'altra spenta e cliccabile. -->
+<!-- Selettore lingua come segmented control mono: un indicatore in accento scivola
+     sotto la lingua attiva (come il thumb del MotionToggle), le altre celle restano
+     spente e cliccabili. -->
 <div
-	class="inline-flex items-center gap-0.5 rounded-md border border-white/10 bg-white/[0.02] p-0.5 font-mono text-xs"
+	class="relative inline-flex items-center rounded-md border border-white/10 bg-white/[0.02] p-0.5 font-mono text-xs"
 	role="group"
 	aria-label="Lingua"
 >
+	<!-- Indicatore scivolante (passo = larghezza di una cella). -->
+	<span
+		class="pointer-events-none absolute top-0.5 bottom-0.5 left-0.5 rounded-sm bg-accent/15 transition-transform duration-300 ease-out"
+		style="width: calc((100% - 0.25rem) / {languages.length}); transform: translateX({activeIndex *
+			100}%);"
+		aria-hidden="true"
+	></span>
 	{#each languages as language (language.code)}
 		{#if language.code === selectedLanguage}
-			<span aria-current="true" class="rounded-sm bg-accent/15 px-2 py-0.5 text-accent"
+			<span
+				aria-current="true"
+				class="relative z-10 px-2 py-0.5 text-center text-accent transition-colors"
 				>{language.code.toUpperCase()}</span
 			>
 		{:else}
@@ -44,7 +62,7 @@
 					e.preventDefault();
 					goto(url, { noScroll: true });
 				}}
-				class="rounded-sm px-2 py-0.5 text-gray-500 transition-colors hover:bg-white/5 hover:text-white"
+				class="relative z-10 px-2 py-0.5 text-center text-gray-500 transition-colors hover:text-white"
 				>{language.code.toUpperCase()}</a
 			>
 		{/if}

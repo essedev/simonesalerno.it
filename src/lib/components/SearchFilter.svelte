@@ -227,7 +227,7 @@
 		{#if hasActiveFilters}
 			<button
 				onclick={clearAllFilters}
-				class="rounded-md border border-white/10 bg-white/[0.02] px-4 py-2 font-mono text-sm text-white/80 backdrop-blur-sm transition-colors hover:border-accent/50 hover:bg-white/10"
+				class="rounded-md border border-white/10 bg-white/[0.02] px-4 py-2 font-mono text-sm text-white/80 backdrop-blur-sm transition-colors duration-200 hover:border-accent/50 hover:bg-white/[0.045]"
 			>
 				{t.clearFilters}
 			</button>
