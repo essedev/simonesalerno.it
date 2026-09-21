@@ -27,6 +27,8 @@
 		"@eslint/compat": "^2.1.0",
 		"@eslint/js": "^10.0.1",
 		"@fontsource/geist-sans": "^5.2.5",
+		"@fontsource/ibm-plex-sans": "^5.2.8",
+		"@fontsource/martian-mono": "^5.2.7",
 		"@playwright/test": "^1.60.0",
 		"@resvg/resvg-js": "^2.6.2",
 		"@sveltejs/adapter-auto": "^7.0.1",
