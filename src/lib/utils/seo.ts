@@ -29,7 +29,7 @@ export function buildCanonical(origin: string, pathname: string): string {
 
 /**
  * Link alternate hreflang per tutte le lingue + x-default. L'URL equivalente in
- * ogni lingua e' calcolato con getLanguageUrl (stessa logica del language switcher).
+ * ogni lingua è calcolato con getLanguageUrl (stessa logica del language switcher).
  */
 export function buildAlternates(params: {
 	origin: string;

@@ -174,7 +174,7 @@ export interface LayoutData {
 	projects: ProjectItem[];
 	articles: ArticleItem[];
 	slugMap: SlugMapData;
-	/** Id del tema accento scelto (dal cookie), per applicarlo gia' in SSR. */
+	/** Id del tema accento scelto (dal cookie), per applicarlo già in SSR. */
 	accent: string;
 }
 

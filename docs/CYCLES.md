@@ -402,7 +402,7 @@ vision completa, le idee considerate e quelle scartate vivono in `docs/RESTYLE.m
 
 - `feat(content)`: welcome riposizionato AI-first. Via il framing difensivo
   ("l'architettura la decide l'umano, l'AI velocizza, l'umano valida") per uno
-  AI-first: l'umano progetta il sistema, l'AI scrive, l'output e' production-ready.
+  AI-first: l'umano progetta il sistema, l'AI scrive, l'output è production-ready.
 - `feat(content)`: label dello status `idea` -> "Esplorazione" / "Exploration"
   (la chiave interna resta `idea`).
 
@@ -431,8 +431,8 @@ vision completa, le idee considerate e quelle scartate vivono in `docs/RESTYLE.m
 
 - Motif "doppia S" (richiama altro -> handle "essedev").
 - Font: Jacquard 12/24 (fantasy, non fitta); Fraunces italic (il serif-su-dark
-  grande e' l'estetica dei template generati da AI).
-- Colore: arancione (complementare al logo blu, ci litiga), viola (cliche'-AI),
+  grande è l'estetica dei template generati da AI).
+- Colore: arancione (complementare al logo blu, ci litiga), viola (cliché-AI),
   blu-logo (generico) -> azzurro elettrico.
 - Animazioni custom dell'hero **congelate**: tararle alla cieca (senza vedere il
   movimento negli screenshot) non converge; da rifare come sistema coerente.

@@ -59,7 +59,7 @@
 			</div>
 		</div>
 
-		<!-- Hamburger: stessa cella (px + py) della X nell'overlay, cosi' aprendo non salta. -->
+		<!-- Hamburger: stessa cella (px + py) della X nell'overlay, così aprendo non salta. -->
 		<div class="flex h-10 w-10 items-center justify-center lg:hidden">
 			{#if !menuOpen}
 				<button
@@ -83,7 +83,7 @@
 
 	{#if menuOpen}
 		<!-- Overlay mobile autocontenuto: contenuto dentro lo stesso max-w-[90vw] del
-		     sito, cosi' logo e padding-x combaciano con la navbar (niente salto). -->
+		     sito, così logo e padding-x combaciano con la navbar (niente salto). -->
 		<div
 			class="fullscreen-overlay z-40 bg-black/90 backdrop-blur-md lg:hidden"
 			transition:fade={{ duration: 200 }}

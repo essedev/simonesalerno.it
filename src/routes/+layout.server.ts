@@ -8,7 +8,7 @@ export const load: LayoutServerLoad = async ({ url, cookies }): Promise<LayoutDa
 	const pathParts = url.pathname.split('/');
 	const lang = pathParts[1] || 'en';
 
-	// Tema accento salvato (cookie): passato all'AccentPicker perche' parta gia'
+	// Tema accento salvato (cookie): passato all'AccentPicker perché parta già
 	// con la selezione corretta in SSR (niente scatto dell'indicatore al load).
 	const accent = resolveAccentId(cookies.get(ACCENT_COOKIE));
 
@@ -16,7 +16,7 @@ export const load: LayoutServerLoad = async ({ url, cookies }): Promise<LayoutDa
 	const languages = await loader.loadConfig('languages');
 	const validLang = languages.find((l) => l.code === lang)?.code || 'en';
 
-	// Il resto dei caricamenti e' indipendente: eseguili in parallelo.
+	// Il resto dei caricamenti è indipendente: eseguili in parallelo.
 	const [
 		navigation,
 		global,
