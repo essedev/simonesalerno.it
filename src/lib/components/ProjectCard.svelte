@@ -17,17 +17,16 @@
 	}: ProjectCardProps = $props();
 </script>
 
-<a
-	href={`${base}${link}`}
-	class="group flex flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.02] transition-[transform,border-color] duration-200 ease-out hover:-translate-y-1 hover:border-accent/50"
->
-	<OptimizedImage
-		src={featuredImage}
-		alt={title}
-		className="aspect-video saturate-[0.8] transition-all duration-300 group-hover:saturate-100"
-		showPlaceholder={Boolean(featuredImagePlaceholder)}
-		sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-	/>
+<a href={`${base}${link}`} class="archive-card group flex h-full flex-col">
+	<div class="px-5 pt-5">
+		<OptimizedImage
+			src={featuredImage}
+			alt={title}
+			className="archive-card__media aspect-video rounded-md"
+			showPlaceholder={Boolean(featuredImagePlaceholder)}
+			sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+		/>
+	</div>
 
 	<div class="flex flex-1 flex-col p-5">
 		<div class="mb-3 flex items-center justify-between">

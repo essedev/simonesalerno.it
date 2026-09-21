@@ -15,15 +15,35 @@
 	--radius-lg: 1rem;
 	--radius-xl: 1.4rem;
 
-	/* Motion: easing standard che decelera ("expoOut"), firma del movimento del
-	   sito. Usato da reveal, transizioni e micro-interazioni; da un solo punto.
-	   Tailwind genera l'utility `ease-out-expo`. */
+	/* Motion. `expo` è la firma del sito (decelerazione decisa) per le
+	   micro-interazioni; `reveal` è più morbido e percepibile, per l'entrata
+	   delle sezioni (su movimenti ampi l'expo risultava scattante). Un solo punto.
+	   Tailwind genera le utility `ease-out-expo` / `ease-reveal`. */
 	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-reveal: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* L'accento è registrato come <color> così è interpolabile: cambiare tema fa un
+   crossfade RGB diretto (niente giro sull'hue) e si propaga a tutto ciò che lo deriva
+   via color-mix (glow, ombre). L'AccentPicker fa solo lo snap del valore; il fade è
+   qui. Reduced-motion lo spegne dal gate motion più in basso (snap istantaneo). */
+@property --color-accent {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #2cc3f7;
+}
+@property --color-accent-soft {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #7dd9fb;
 }
 
 html {
 	overscroll-behavior: none;
 	-webkit-overflow-scrolling: touch;
+	transition:
+		--color-accent 0.4s var(--ease-out-expo),
+		--color-accent-soft 0.4s var(--ease-out-expo);
 }
 
 body {
@@ -41,11 +61,11 @@ body {
 }
 
 /* "Stanza" del laboratorio: griglia in prospettiva su pavimento e soffitto,
-   sfumata verso il centro dove vive il contenuto. Da' profondita' allo sfondo
+   sfumata verso il centro dove vive il contenuto. Dà profondità allo sfondo
    invece di una texture piatta. */
 body::before {
 	/* Pavimento della "stanza": griglia in prospettiva ancorata in basso che
-	   sfuma salendo. Da' profondita' di spazio senza chiudersi a clessidra. */
+	   sfuma salendo. Dà profondità di spazio senza chiudersi a clessidra. */
 	content: '';
 	position: fixed;
 	left: 50%;
@@ -66,7 +86,7 @@ body::before {
 }
 
 /* Orizzonte: glow arancione tenue dal basso, luce da officina/CRT in fondo alla
-   "stanza". Da' profondita' e calore al pavimento. */
+   "stanza". Dà profondità e calore al pavimento. */
 body::after {
 	content: '';
 	position: fixed;
@@ -114,15 +134,78 @@ body::after {
    `is-visible` quando entra nel viewport. Stagger opzionale via transition-delay. */
 .reveal {
 	opacity: 0;
-	transform: translateY(1rem);
+	/* Distanza override-abile per-elemento via --reveal-shift: le card entrano da più
+	   lontano (2rem) per dare ritmo, le sezioni restano al default. */
+	transform: translateY(var(--reveal-shift, 1.25rem));
 	transition:
-		opacity 0.6s var(--ease-out-expo),
-		transform 0.6s var(--ease-out-expo);
+		opacity 0.7s var(--ease-reveal),
+		transform 0.7s var(--ease-reveal);
 }
 
 .reveal.is-visible {
 	opacity: 1;
 	transform: none;
+}
+
+/* Entrata della hero: animazione al caricamento, non reveal-on-scroll. La hero è
+   sempre above-the-fold, quindi deve animare all'arrivo in pagina in modo garantito
+   e indipendente da JS/observer (che above-the-fold "saltava" la transizione). Con
+   `both` lo stato iniziale (opacity 0) vale già durante il delay. */
+.hero-enter {
+	animation: heroEnter 0.7s var(--ease-reveal) 0.15s both;
+}
+
+@keyframes heroEnter {
+	from {
+		opacity: 0;
+		transform: translateY(1.25rem);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* Card "scheda d'archivio" (progetti + articoli): superficie e hover da un solo
+   punto, così il movimento si tara qui invece che duplicato nelle utility. Hover:
+   micro-lift + bordo accento + glow accento soft; l'immagine fa un micro-zoom e
+   recupera saturazione. Tutto sull'easing-firma `expo`. Reduced-motion: il gate
+   motion più in basso azzera le transizioni (snap), il color/bordo restano. */
+.archive-card {
+	border: 1px solid rgb(255 255 255 / 0.1);
+	border-radius: var(--radius-md);
+	background: rgb(255 255 255 / 0.02);
+	transition:
+		transform 0.3s var(--ease-out-expo),
+		border-color 0.3s var(--ease-out-expo),
+		background-color 0.3s var(--ease-out-expo);
+}
+
+/* Niente ombra: l'elevazione si legge da lift + bordo accento + superficie che si
+   schiarisce appena. Registro flat/sobrio, l'accento resta un segnale (il bordo). */
+.archive-card:hover {
+	transform: translateY(-0.35rem);
+	border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+	background-color: rgb(255 255 255 / 0.045);
+}
+
+.archive-card__media {
+	filter: saturate(0.8);
+	transition: filter 0.4s var(--ease-out-expo);
+}
+
+/* Zoom sull'immagine interna (non sul box): il box è overflow-hidden, così il
+   micro-zoom resta dentro la cornice arrotondata. */
+.archive-card__media img {
+	transition: transform 0.6s var(--ease-out-expo);
+}
+
+.archive-card:hover .archive-card__media {
+	filter: saturate(1);
+}
+
+.archive-card:hover .archive-card__media img {
+	transform: scale(1.04);
 }
 
 .slide-in {
@@ -136,30 +219,6 @@ body::after {
 	to {
 		transform: translateY(0);
 	}
-}
-
-/* Cursore terminale del logo testuale */
-.blink-cursor {
-	animation: blink 1.1s step-end infinite;
-}
-
-@keyframes blink {
-	0%,
-	100% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0;
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	html:not([data-motion='full']) .blink-cursor {
-		animation: none;
-	}
-}
-html[data-motion='reduced'] .blink-cursor {
-	animation: none;
 }
 
 /* Skip-to-content: nascosto fino a focus da tastiera */
@@ -222,8 +281,8 @@ html[data-motion='reduced'] .reveal {
 	transform: none !important;
 }
 
-/* Eccezione: il thumb dello switch "Animazioni" e' un feedback funzionale e deve
-   scivolare anche con movimento ridotto (micro-movimento, non decorativo), cosi'
+/* Eccezione: il thumb dello switch "Animazioni" è un feedback funzionale e deve
+   scivolare anche con movimento ridotto (micro-movimento, non decorativo), così
    accendere e spegnere sono coerenti. Senza, spegnere applica data-motion='reduced'
    che bloccherebbe l'animazione del thumb stesso. */
 @media (prefers-reduced-motion: reduce) {

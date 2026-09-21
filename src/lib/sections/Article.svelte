@@ -30,6 +30,9 @@
 	);
 	let metrics = $derived(contentMetrics(currentTranslation?.content, currentLang));
 
+	// Stagger d'ingresso delle card correlate (come le listing).
+	const cardStagger = (i: number) => Math.min(i, 4) * 60;
+
 	function formatDate(dateString: string, lang: string): string {
 		const date = new Date(dateString);
 		const options: Intl.DateTimeFormatOptions = {
@@ -41,15 +44,15 @@
 	}
 </script>
 
-<div use:reveal class="reveal">
-	<div class="flex pb-10 text-2xl 2xl:pb-14">
+<div>
+	<div use:reveal class="reveal flex pb-10 text-2xl 2xl:pb-14">
 		<BackLink href={blogUrl} label={backText} />
 	</div>
 
 	{#if content && currentTranslation}
 		<article class="flex flex-col gap-y-8">
 			<!-- Header with title and meta -->
-			<header class="flex flex-col gap-y-4">
+			<header use:reveal={{ delay: 60 }} class="reveal flex flex-col gap-y-4">
 				<h1 class="text-5xl font-normal sm:text-6xl 2xl:text-7xl">
 					{currentTranslation.title}
 				</h1>
@@ -94,7 +97,7 @@
 
 			<!-- Featured image if available -->
 			{#if content.meta.featured_image || content.meta.featuredImagePlaceholder}
-				<div class="w-full">
+				<div use:reveal={{ delay: 110 }} class="reveal w-full">
 					<OptimizedImage
 						src={content.meta.featured_image}
 						alt={currentTranslation.title}
@@ -107,29 +110,36 @@
 
 			<!-- Content -->
 			{#if currentTranslation.content}
-				<ContentRenderer content={currentTranslation.content} className="max-w-none" />
+				<div use:reveal={{ delay: 150 }} class="reveal">
+					<ContentRenderer content={currentTranslation.content} className="max-w-none" />
+				</div>
 			{/if}
 		</article>
 
 		{#if related && related.length > 0}
 			<section class="mt-12 border-t border-white/10 pt-10">
-				<h2 class="mb-6 text-3xl font-normal text-gray-100">
+				<h2 use:reveal class="reveal mb-6 text-3xl font-normal text-gray-100">
 					{currentLang === 'en' ? 'Related articles' : 'Articoli correlati'}
 				</h2>
 				<div class="grid grid-cols-1 gap-6 sm:gap-10 md:grid-cols-2 xl:grid-cols-3">
-					{#each related as item (item.meta.id)}
+					{#each related as item, i (item.meta.id)}
 						{@const t = item.translations[currentLang]}
 						{#if t}
-							<ArticleCard
-								title={t.title}
-								excerpt={t.excerpt}
-								featuredImage={item.meta.featured_image}
-								featuredImagePlaceholder={item.meta.featuredImagePlaceholder}
-								link={`/${currentLang}/${blogRoute}/${t.slug}`}
-								publishedDate={item.meta.published_date}
-								tags={translateTags(global, t.tags)}
-								selectedLanguage={currentLang}
-							/>
+							<div
+								use:reveal={{ delay: cardStagger(i) }}
+								class="reveal h-full [--reveal-shift:2rem]"
+							>
+								<ArticleCard
+									title={t.title}
+									excerpt={t.excerpt}
+									featuredImage={item.meta.featured_image}
+									featuredImagePlaceholder={item.meta.featuredImagePlaceholder}
+									link={`/${currentLang}/${blogRoute}/${t.slug}`}
+									publishedDate={item.meta.published_date}
+									tags={translateTags(global, t.tags)}
+									selectedLanguage={currentLang}
+								/>
+							</div>
 						{/if}
 					{/each}
 				</div>

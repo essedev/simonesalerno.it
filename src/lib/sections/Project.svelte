@@ -28,14 +28,14 @@
 	);
 </script>
 
-<div use:reveal class="reveal">
-	<div class="flex pb-10 text-2xl 2xl:pb-14">
+<div>
+	<div use:reveal class="reveal flex pb-10 text-2xl 2xl:pb-14">
 		<BackLink href={projectsUrl} label={backText} />
 	</div>
 
 	{#if content && currentTranslation}
 		<article class="flex flex-col gap-y-8">
-			<header class="flex flex-col gap-y-6">
+			<header use:reveal={{ delay: 60 }} class="reveal flex flex-col gap-y-6">
 				{#if content.meta.status}
 					<StatusBadge status={content.meta.status} {global} class="self-start" />
 				{/if}
@@ -78,7 +78,7 @@
 			</header>
 
 			{#if content.meta.featured_image || content.meta.featuredImagePlaceholder}
-				<div class="w-full">
+				<div use:reveal={{ delay: 110 }} class="reveal w-full">
 					<OptimizedImage
 						src={content.meta.featured_image}
 						alt={currentTranslation.title}
@@ -90,7 +90,9 @@
 			{/if}
 
 			{#if currentTranslation.content}
-				<ContentRenderer content={currentTranslation.content} className="flex flex-col gap-y-4" />
+				<div use:reveal={{ delay: 150 }} class="reveal">
+					<ContentRenderer content={currentTranslation.content} className="flex flex-col gap-y-4" />
+				</div>
 			{/if}
 		</article>
 	{/if}

@@ -48,16 +48,22 @@
 	let blogPageLink = $derived(
 		`${base}/${selectedLanguage}/${navigation[selectedLanguage].articles}`
 	);
+
+	// Stagger d'ingresso delle card (vedi Projects): cascata leggera e cappata.
+	const cardStagger = (i: number) => Math.min(i, 4) * 60;
 </script>
 
-<div use:reveal class="reveal flex flex-col gap-y-10 sm:gap-y-16 2xl:gap-y-[4.5rem]">
-	<h2 class="text-[2.5rem] leading-none font-normal sm:text-5xl md:text-6xl 2xl:text-7xl">
+<div class="flex flex-col gap-y-10 sm:gap-y-16 2xl:gap-y-[4.5rem]">
+	<h2
+		use:reveal
+		class="reveal text-[2.5rem] leading-none font-normal sm:text-5xl md:text-6xl 2xl:text-7xl"
+	>
 		{blogPage.title}
 	</h2>
 
 	<!-- Search and Filter Component -->
 	{#if showFilters && activeFilters && availableTags}
-		<div class="relative z-10">
+		<div use:reveal={{ delay: 80 }} class="reveal relative z-10">
 			<SearchFilter
 				filters={activeFilters}
 				{availableTags}
@@ -70,22 +76,24 @@
 
 	{#if currentArticles && currentArticles.length > 0}
 		<div class="grid grid-cols-1 gap-6 sm:gap-10 md:grid-cols-2 xl:grid-cols-3">
-			{#each currentArticles as article (article.meta.id)}
-				<ArticleCard
-					title={article.translations[selectedLanguage].title}
-					excerpt={article.translations[selectedLanguage].excerpt}
-					featuredImage={article.meta.featured_image}
-					featuredImagePlaceholder={article.meta.featuredImagePlaceholder}
-					link={'/' +
-						selectedLanguage +
-						'/' +
-						navigation[selectedLanguage].articles +
-						'/' +
-						article.translations[selectedLanguage].slug}
-					publishedDate={article.meta.published_date}
-					tags={translateTags(global, article.translations[selectedLanguage].tags)}
-					{selectedLanguage}
-				/>
+			{#each currentArticles as article, i (article.meta.id)}
+				<div use:reveal={{ delay: cardStagger(i) }} class="reveal h-full [--reveal-shift:2rem]">
+					<ArticleCard
+						title={article.translations[selectedLanguage].title}
+						excerpt={article.translations[selectedLanguage].excerpt}
+						featuredImage={article.meta.featured_image}
+						featuredImagePlaceholder={article.meta.featuredImagePlaceholder}
+						link={'/' +
+							selectedLanguage +
+							'/' +
+							navigation[selectedLanguage].articles +
+							'/' +
+							article.translations[selectedLanguage].slug}
+						publishedDate={article.meta.published_date}
+						tags={translateTags(global, article.translations[selectedLanguage].tags)}
+						{selectedLanguage}
+					/>
+				</div>
 			{/each}
 		</div>
 
@@ -101,7 +109,7 @@
 			<div class="flex justify-center">
 				<a
 					href={blogPageLink}
-					class="group flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.02] px-8 py-4 backdrop-blur-md transition-colors duration-200 hover:border-accent/50 hover:bg-white/10"
+					class="group flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.02] px-8 py-4 backdrop-blur-md transition-colors duration-200 hover:border-accent/50 hover:bg-white/[0.045]"
 				>
 					<span class="text-lg font-medium text-gray-300">{t.viewAll}</span>
 					<ArrowRight

@@ -2,20 +2,28 @@
 	import { ACCENT_THEMES, ACCENT_COOKIE, type AccentTheme } from '$lib/themes';
 	import { untrack } from 'svelte';
 
-	// `accent` arriva dal layout (cookie risolto in SSR): l'indicatore parte gia'
-	// sulla selezione giusta e il colore e' applicato pre-paint sull'attributo style
-	// di <html>, quindi qui non serve ne' rileggere lo storage ne' ri-applicarlo al load.
+	// `accent` arriva dal layout (cookie risolto in SSR): l'indicatore parte già
+	// sulla selezione giusta e il colore è applicato pre-paint sull'attributo style
+	// di <html>, quindi qui non serve né rileggere lo storage né ri-applicarlo al load.
 	let { accent = 'blue', lang = 'it' }: { accent?: string; lang?: string } = $props();
 
-	// Valore iniziale dalla prop; poi `active` e' gestito localmente da select().
+	// Valore iniziale dalla prop; poi `active` è gestito localmente da select().
 	let active = $state(untrack(() => accent));
-	let rafId = 0;
 
 	function setVars(accent: string, soft: string) {
 		const el = document.documentElement;
 		el.style.setProperty('--color-accent', accent);
 		el.style.setProperty('--color-accent-soft', soft);
 	}
+
+	/* Versione precedente: "hue-sweep". Cambiando tema la tinta ruotava lungo il cerchio
+	   cromatico (rAF, ~600ms) invece del crossfade CSS attuale. DISATTIVATA (commentata,
+	   non rimossa) perché troppo vistosa. Per riattivarla: (1) rimetti i campi h/s/l su
+	   AccentTheme in themes.ts -> blue {h:197,s:92,l:57}, orange {h:28,s:100,l:55},
+	   violet {h:271,s:91,l:65}; (2) togli la transition su --color-accent in globals.css;
+	   (3) in select() usa il ramo qui sotto al posto del setVars diretto.
+
+	let rafId = 0;
 
 	// Replica la logica motion del sito (data-motion override + prefers-reduced-motion).
 	function motionReduced(): boolean {
@@ -27,8 +35,8 @@
 
 	const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-	// "Ricalibrazione dell'hue": ruota la tinta dal colore attuale al nuovo lungo il
-	// percorso piu' breve del cerchio cromatico, poi fa snap al valore esatto.
+	// Ruota la tinta dal colore attuale al nuovo lungo il percorso più breve del
+	// cerchio cromatico, poi fa snap al valore esatto.
 	function animateTo(from: AccentTheme, to: AccentTheme) {
 		cancelAnimationFrame(rafId);
 		let dh = to.h - from.h;
@@ -52,18 +60,20 @@
 		rafId = requestAnimationFrame(step);
 	}
 
+	// Nel select(): const from = ACCENT_THEMES.find((t) => t.id === active) ?? ACCENT_THEMES[0];
+	//               if (motionReduced()) setVars(theme.accent, theme.soft); else animateTo(from, theme);
+	$effect(() => () => cancelAnimationFrame(rafId));
+	*/
+
 	function select(theme: AccentTheme) {
-		const from = ACCENT_THEMES.find((t) => t.id === active) ?? ACCENT_THEMES[0];
 		if (theme.id === active) return;
 		active = theme.id;
 		// Cookie (non localStorage): leggibile dal server, applica il tema in SSR.
 		document.cookie = `${ACCENT_COOKIE}=${theme.id}; path=/; max-age=31536000; samesite=lax`;
-		if (motionReduced()) setVars(theme.accent, theme.soft);
-		else animateTo(from, theme);
+		// Snap del valore: il crossfade tra vecchio e nuovo accento è gestito in CSS
+		// (transition su --color-accent, registrato come <color> in globals).
+		setVars(theme.accent, theme.soft);
 	}
-
-	// Cleanup client-only del raf in volo (in un $effect, cosi' non gira in SSR).
-	$effect(() => () => cancelAnimationFrame(rafId));
 
 	let labelPrefix = $derived(lang === 'en' ? 'Accent' : 'Accento');
 	let activeIndex = $derived(ACCENT_THEMES.findIndex((t) => t.id === active));
