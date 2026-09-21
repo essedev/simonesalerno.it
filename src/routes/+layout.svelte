@@ -121,13 +121,15 @@
 		return false;
 	});
 
-	// Dynamic title based on current route with error handling
-	let pageTitle = $derived.by(() => {
-		if (!data?.global?.title) return 'Simone Salerno';
+	// Titolo per route. Il brand va in coda come suffisso: `global.title` contiene gia'
+	// il nome, quindi in home e nei fallback si usa tal quale, senza raddoppiarlo.
+	const BRAND = 'Simone Salerno';
 
-		// If page is in error state, return default title
+	let pageTitle = $derived.by(() => {
+		if (!data?.global?.title) return BRAND;
+
 		if (isPageError) {
-			return `Simone Salerno • ${data.global.title}`;
+			return data.global.title;
 		}
 
 		const currentRoute = page.route.id;
@@ -135,16 +137,16 @@
 
 		// Home page
 		if (currentRoute === '/[page=lang]') {
-			return `Simone Salerno • ${data.global.title}`;
+			return data.global.title;
 		}
 
 		// Projects/Articles listing pages
 		if (currentRoute === '/[page=lang]/[route=route]' && params.page && params.route) {
 			const routeType = sectionOf(params.route, params.page, data.navigation);
 			if (routeType === 'projects') {
-				return `Simone Salerno • ${data.projectsPage?.title || 'Projects'}`;
+				return `${data.projectsPage?.title || 'Projects'} • ${BRAND}`;
 			} else if (routeType === 'blog') {
-				return `Simone Salerno • ${data.blogPage?.title || 'Blog'}`;
+				return `${data.blogPage?.title || 'Blog'} • ${BRAND}`;
 			}
 		}
 
@@ -152,12 +154,12 @@
 		if (currentRoute === '/[page=lang]/[route=route]/[sub]') {
 			const pageData = page.data;
 			if (pageData?.content?.translations?.[pageData.currentLang]?.title) {
-				return `Simone Salerno • ${pageData.content.translations[pageData.currentLang].title}`;
+				return `${pageData.content.translations[pageData.currentLang].title} • ${BRAND}`;
 			}
 		}
 
 		// Fallback
-		return `Simone Salerno • ${data.global.title}`;
+		return data.global.title;
 	});
 
 	// Dynamic locale for meta tags
